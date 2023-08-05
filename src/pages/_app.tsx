@@ -4,10 +4,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { getTheme } from '../../components/layout/Theme';
 
 export default function App({ Component, pageProps }: AppProps) {
-<<<<<<< HEAD
-  return <Component {...pageProps} />
-}
-=======
   const theme = getTheme()
 
   return (
@@ -16,4 +12,3 @@ export default function App({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   )
 }
->>>>>>> main
