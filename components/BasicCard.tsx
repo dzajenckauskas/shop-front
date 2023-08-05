@@ -1,15 +1,13 @@
-import * as React from 'react';
 // import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/material/Button';
+import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
+import Link from 'next/link';
 import { ProductType } from './shared/ProductTypes';
-import Link from 'next/link'
 type Props = {
     product: ProductType;
 }

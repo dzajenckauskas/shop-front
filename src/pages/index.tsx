@@ -1,4 +1,4 @@
-import { Stack } from '@mui/system';
+import { Stack } from '@mui/material';
 import axios from 'axios';
 import Head from 'next/head';
 import BasicCard from '../../components/BasicCard';
@@ -25,7 +25,7 @@ export default function Home({ products }: Props) {
       <Header />
       <Stack direction={'row'} sx={{ maxWidth: 'lg', mx: 'auto' }}
         spacing={4} p={{ sm: 4, xs: 2 }}>
-        {renderProducts}
+        {/* {renderProducts} */}
       </Stack>
     </>
   )

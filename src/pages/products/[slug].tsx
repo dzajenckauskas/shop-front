@@ -1,8 +1,15 @@
+import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined'
+import { Stack } from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import axios from 'axios'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
-import axios from 'axios'
+import Link from 'next/link'
+import Header from '../../../components/layout/header/Header'
 import { ProductType } from '../../../components/shared/ProductTypes'
-
 const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
@@ -18,11 +25,50 @@ export default function Home({ product }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div>
-          <h2>{product.attributes.title}</h2>
-        </div>
-      </main>
+      <Header />
+      <Stack direction={'column'} sx={{ maxWidth: 'lg', mx: 'auto', p: { sm: 4, xs: 2 } }}
+        spacing={4}>
+        <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
+          <Box>
+            <Typography variant='h6' fontWeight={600}>{product.attributes.title}</Typography>
+            <Typography variant='body2' fontWeight={400}>April 24 to May 02, 2021</Typography>
+          </Box>
+          <IconButton
+            size="small"
+          >
+            <BookmarkAdd sx={{ color: 'black' }} />
+          </IconButton>
+        </Stack>
+        <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
+          <img
+            src="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286"
+            srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+            loading="lazy"
+            alt=""
+          />
+        </Stack>
+        <Stack direction={'row'} pt={1}>
+          <Stack spacing={.25} >
+            <Typography variant='caption'>Price:</Typography>
+            <Typography variant='h6'>
+              ${product.attributes.price.toFixed(2)}
+            </Typography>
+          </Stack>
+          <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
+            passHref href={`/checkout`}>
+            <Button
+
+              size="medium"
+              color="primary"
+              variant='contained'
+              aria-label={`View ${product.attributes.title} product`}
+            >
+              Buy
+            </Button>
+          </Link>
+        </Stack>
+
+      </Stack>
     </>
   )
 }

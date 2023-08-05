@@ -130,8 +130,8 @@ export const Theme = createTheme({
             // 500: '#20599280'
         },
         secondary: {
-            main: '#379683',
-            dark: '#5CDB95',
+            main: '#5CDB95',
+            dark: '#379683',
         },
         info: {
             main: '#fff'
