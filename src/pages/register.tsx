@@ -47,27 +47,9 @@ export default function Register() {
                     <PageTitle title={'Sign up'} />
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                            {/* <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                />
-                            </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
-                                />
-                            </Grid> */}
-                            <Grid item xs={12} sm={6}>
-                                <TextField
+                                    variant='standard'
                                     required
                                     fullWidth
                                     id="username"
@@ -78,6 +60,7 @@ export default function Register() {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    variant='standard'
                                     required
                                     fullWidth
                                     id="email"
@@ -88,6 +71,7 @@ export default function Register() {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    variant='standard'
                                     required
                                     fullWidth
                                     name="password"

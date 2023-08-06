@@ -56,6 +56,7 @@ export default function Contacts() {
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
                         <TextField
+                            variant='standard'
                             margin="normal"
                             required
                             fullWidth
@@ -66,6 +67,7 @@ export default function Contacts() {
                             autoFocus
                         />
                         <TextField
+                            variant='standard'
                             margin="normal"
                             fullWidth
                             id="phone"
@@ -75,16 +77,18 @@ export default function Contacts() {
                             autoFocus
                         />
                         <TextField
+                            variant='standard'
                             margin="normal"
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
                             autoFocus
                         />
                         <TextField
+                            variant='standard'
                             margin="normal"
                             required
                             fullWidth

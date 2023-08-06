@@ -45,6 +45,7 @@ export default function ForgotPassword() {
                     <PageTitle title={'Forgot password?'} />
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%' }}>
                         <TextField
+                            variant='standard'
                             margin="normal"
                             required
                             fullWidth

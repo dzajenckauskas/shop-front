@@ -77,6 +77,7 @@ export default function Account() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  autoFocus
                   variant='standard'
                   InputLabelProps={{
                     shrink: true,
@@ -119,7 +120,6 @@ export default function Account() {
                   fullWidth
                   id="firstName"
                   label="First Name"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>

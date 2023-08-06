@@ -29,8 +29,8 @@ export default function Header({ isLoggedIn }: Props) {
     }
     return (
         <>
-            <Container maxWidth={false} sx={{ position: 'fixed', top: 0, alignItems: 'center', width: '100%' }}>
-                <Stack direction={'row'} p={2} sx={{ px: { sm: 4, xs: 2 }, maxWidth: 'lg', mx: 'auto', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+            <Container maxWidth={false} sx={{ zIndex: 99, position: 'fixed', top: 0, alignItems: 'center', width: '100%', backgroundColor: theme.palette.background.default }}>
+                <Stack direction={'row'} p={2} sx={{ px: { lg: 4, md: 0, sm: 1, xs: 0 }, maxWidth: 'lg', mx: 'auto', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
                     <Link passHref href={'/'} style={{ display: 'flex', alignItems: 'center' }}>
                         <Avatar sx={{ bgcolor: '#fff', mr: 1 }}>
                             <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
@@ -81,7 +81,6 @@ export default function Header({ isLoggedIn }: Props) {
                 </Stack>
             </Container>
             <Box sx={{ height: 85, paddingBottom: 10 }}>
-                {/*  */}
             </Box>
         </>
     );
