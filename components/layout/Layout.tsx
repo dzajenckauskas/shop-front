@@ -17,6 +17,7 @@ const Layout = ({ children, }: Props) => {
 
     useEffect(() => {
         const jwt = sessionStorage.getItem('jwt');
+
         if (jwt) {
             setIsLoggedIn(true)
         }

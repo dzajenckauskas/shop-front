@@ -17,8 +17,6 @@ import { PageTitle } from '../../components/layout/Pagetitle';
 export default function SignIn() {
     const router = useRouter();
 
-
-
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -35,9 +33,10 @@ export default function SignIn() {
                 // password: data.get('password'),
             })
             .then(response => {
-                console.log('User profile', response.data.user);
-                console.log('User token', response.data.jwt);
+                // console.log('User profile', response.data.user);
+                // console.log('User token', response.data.jwt);
                 sessionStorage.setItem('jwt', response.data.jwt);
+                sessionStorage.setItem('userId', response.data.user.id);
                 router.push('/')
             })
             .catch(error => {

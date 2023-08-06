@@ -4,56 +4,40 @@ import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import Layout from '../../components/layout/Layout';
 import { PageTitle } from '../../components/layout/Pagetitle';
-import { getTheme } from '../../components/layout/Theme';
-import axios from 'axios'
 
 
-const theme = getTheme();
 
 export default function Register() {
-    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault();
-    //     const data = new FormData(event.currentTarget);
-    //     console.log({
-    //         email: data.get('email'),
-    //         password: data.get('password'),
-    //     });
-    // };
-
-
+    const router = useRouter()
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            identifier: data.get('email'),
-            password: data.get('password'),
-        });
 
-        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`,
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local/register`,
             {
-                identifier: 'dan',
-                password: 'dandan'
-                // identifier: data.get('email'),
-                // password: data.get('password'),
+                username: data.get('username'),
+                email: data.get('email'),
+                password: data.get('password'),
+                subscribed: data.get('subscribed'),
             })
             .then(response => {
                 console.log('User profile', response.data.user);
                 console.log('User token', response.data.jwt);
-                sessionStorage.setItem('jwt', response.data.jwt);
-                // router.push('/')
+                // sessionStorage.setItem('jwt', response.data.jwt);
+                router.push('/login')
             })
             .catch(error => {
                 console.log('An error occurred:', error.response);
             });
     };
-    // /api/users
-
     return (
         <Layout>
             <Container component="main" maxWidth="sm">
@@ -63,11 +47,10 @@ export default function Register() {
                     <PageTitle title={'Sign up'} />
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
+                            {/* <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="given-name"
                                     name="firstName"
-                                    required
                                     fullWidth
                                     id="firstName"
                                     label="First Name"
@@ -76,15 +59,24 @@ export default function Register() {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    required
                                     fullWidth
                                     id="lastName"
                                     label="Last Name"
                                     name="lastName"
                                     autoComplete="family-name"
                                 />
+                            </Grid> */}
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="username"
+                                    label="Username"
+                                    name="username"
+                                    autoComplete="username"
+                                />
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={12} sm={6}>
                                 <TextField
                                     required
                                     fullWidth
@@ -107,7 +99,7 @@ export default function Register() {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
+                                    control={<Checkbox value="allowExtraEmails" color="primary" name='subscribed' />}
                                     label="I want to receive emails from you."
                                 />
                             </Grid>

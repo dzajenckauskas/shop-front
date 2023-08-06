@@ -53,6 +53,8 @@ export default function ChangePassword() {
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
                         <TextField
+                            variant='standard'
+
                             margin="normal"
                             required
                             fullWidth
@@ -63,14 +65,15 @@ export default function ChangePassword() {
                             autoComplete="current-password"
                         />
                         <TextField
+                            variant='standard'
                             margin="normal"
                             required
                             fullWidth
-                            name="password"
-                            label="Password"
+                            name="oldPassword"
+                            label="Old Password"
                             type="password"
-                            id="password"
-                            autoComplete="current-password"
+                            id="old-password"
+                            autoComplete="old-password"
                         />
 
                         <Button
