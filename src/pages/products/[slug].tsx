@@ -1,14 +1,12 @@
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined'
 import { Stack } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
 import Link from 'next/link'
 import Layout from '../../../components/layout/Layout'
 import { ProductType } from '../../../components/shared/ProductTypes'
-// const inter = Inter({ subsets: ['latin'] })
+import { WishlistToggleButton } from '../../../components/shared/WishlistToggleButton'
 
 type Props = {
   product: ProductType
@@ -16,7 +14,6 @@ type Props = {
 
 export default function Home({ product }: Props) {
   return (
-
     <Layout>
       <Stack direction={'column'} width={'100%'} sx={{ maxWidth: 'lg', mx: 'auto', p: { sm: 4, xs: 2 } }}
         spacing={4}>
@@ -25,11 +22,7 @@ export default function Home({ product }: Props) {
             <Typography variant='h6' fontWeight={600}>{product.attributes.title}</Typography>
             <Typography variant='body2' fontWeight={400}>April 24 to May 02, 2021</Typography>
           </Box>
-          <IconButton
-            size="small"
-          >
-            <BookmarkAdd sx={{ color: 'black' }} />
-          </IconButton>
+          <WishlistToggleButton product={product} />
         </Stack>
         <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
           <img

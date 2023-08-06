@@ -8,11 +8,18 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { ProductType } from './shared/ProductTypes';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { addToWishlist, removeFromWishlist, selectWishlist } from '../app/wishlistSlice';
+import { getTheme } from './layout/Theme';
+import { WishlistToggleButton } from './shared/WishlistToggleButton';
+
 type Props = {
     product: ProductType;
 }
 
 export default function BasicCard({ product }: Props) {
+
+
     return (
         <Card variant="outlined" sx={{ padding: 2 }}>
             <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
@@ -20,11 +27,7 @@ export default function BasicCard({ product }: Props) {
                     <Typography variant='h6' fontWeight={600}>{product.attributes.title}</Typography>
                     <Typography variant='body2' fontWeight={400}>April 24 to May 02, 2021</Typography>
                 </Box>
-                <IconButton
-                    size="small"
-                >
-                    <BookmarkAdd sx={{ color: 'black' }} />
-                </IconButton>
+                <WishlistToggleButton product={product} />
             </Stack>
             <Stack minHeight="120px" maxHeight="200px" py={1}>
                 <img

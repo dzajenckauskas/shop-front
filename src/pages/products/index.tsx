@@ -11,7 +11,7 @@ type Props = {
 
 export default function Home({ products }: Props) {
   const renderProducts = products.data.map((p) => (
-    <BasicCard product={p} />
+    <BasicCard product={p} key={p.id} />
   ))
   return (
     <>
