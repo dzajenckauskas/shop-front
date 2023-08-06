@@ -1,17 +1,16 @@
 import Stack from '@mui/material/Stack';
-import React, { useEffect, useState } from 'react';
-import { getTheme } from './Theme';
-import Header from './header/Header';
-import Footer from './footer/Footer';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { getTheme } from './Theme';
+import Footer from './footer/Footer';
+import Header from './header/Header';
 
 type Props = {
     children: React.ReactNode;
 }
 
 const Layout = ({ children, }: Props) => {
-    const theme = getTheme()
     const router = useRouter()
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
@@ -39,7 +38,7 @@ const Layout = ({ children, }: Props) => {
             </Head>
             <Stack sx={{
                 height: '100%',
-                backgroundColor: theme.palette.background.default,
+                // backgroundColor: theme.palette.background.default,
                 position: 'relative'
             }}>
 

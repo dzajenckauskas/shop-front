@@ -23,6 +23,7 @@ export default function Register() {
 
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local/register`,
             {
+                // username: data.get('username'),
                 username: data.get('username'),
                 email: data.get('email'),
                 password: data.get('password'),

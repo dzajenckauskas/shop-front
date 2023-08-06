@@ -18,7 +18,7 @@ export const Theme = createTheme({
                 }),
                 input: ({ theme }) => theme.unstable_sx({
                     color: `${theme.palette.primary.dark} !important`
-                }),
+                })
             }
         },
         MuiMenuItem: {
