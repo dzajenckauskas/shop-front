@@ -4,16 +4,14 @@ import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
+import axios from 'axios';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
 import { PageTitle } from '../../components/layout/Pagetitle';
-import { getTheme } from '../../components/layout/Theme';
-import axios from 'axios'
-import { useEffect, useState } from 'react';
-
 
 export type AccountData = {
   id?: number;
@@ -21,7 +19,7 @@ export type AccountData = {
   username?: string;
   firstName?: string;
   lastName?: string;
-
+  subscribed?: boolean;
 }
 export default function Account() {
 
@@ -30,43 +28,40 @@ export default function Account() {
     const data = new FormData(event.currentTarget);
     event.preventDefault();
     console.log({
+      username: data.get('username'),
       email: data.get('email'),
-      password: data.get('password'),
-      subscribed: data.get('subscribed'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      subscribed: data.get('subscribed') ? true : false,
     });
+
     axios
       .put(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${accountData?.id}`, {
         username: data.get('username'),
         email: data.get('email'),
         firstName: data.get('firstName'),
         lastName: data.get('lastName'),
-        subscribed: data.get('subscribed') ? true : false,
+        subscribed: data.get('subscribed')
       })
-      .then((response) => {
-        console.log(accountData);
-        // setAccountData(response.data)
-        console.log(response.data)
-      })
-      .catch(err => console.log(`Error: ${err}`))
-  };
-  console.log(accountData);
-
-  useEffect(() => {
-    const id = sessionStorage.getItem('userId');
-    console.log(sessionStorage);
-
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`)
       .then((response) => {
         setAccountData(response.data)
       })
       .catch(err => console.log(`Error: ${err}`))
+  };
 
+  useEffect(() => {
+    const id = sessionStorage.getItem('userId');
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}?populate=*`)
+      .then((response) => {
+        console.log(response.data, 'GET response');
+
+        setAccountData(response.data)
+      })
+      .catch(err => console.log(`Error: ${err}`))
   }, [])
 
-  const updateAccount = () => {
 
-  }
   return (
     <Layout>
       <Container component="main" maxWidth="sm">
@@ -86,7 +81,6 @@ export default function Account() {
                   autoComplete="given-name"
                   name="firstName"
                   value={accountData?.firstName}
-                  // onChange={(e) => { setAccountData({ ...accountData, firstName: e.target.value }) }}
                   fullWidth
                   id="firstName"
                   label="First Name"
@@ -96,6 +90,7 @@ export default function Account() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant='standard'
+                  value={accountData?.lastName}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -138,7 +133,7 @@ export default function Account() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" name='subscribed' />}
+                  control={<Checkbox value={accountData?.subscribed} color="primary" checked={accountData?.subscribed} name='subscribed' />}
                   label="I want to receive emails from you."
                 />
               </Grid>
@@ -148,7 +143,6 @@ export default function Account() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={updateAccount}
             >
               Update
             </Button>
