@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { getTheme } from '../../components/layout/Theme';
 import Header from '../../components/layout/header/Header';
+import Layout from '../../components/layout/Layout';
 
 
 
@@ -28,8 +29,8 @@ export default function Register() {
     };
 
     return (
-        <>
-            <Header />
+        <Layout>
+
             <Container component="main" maxWidth="xs" sx={{ backgroundColor: '#fff' }}>
                 <Box
                     sx={{
@@ -114,7 +115,7 @@ export default function Register() {
                     </Box>
                 </Box>
             </Container>
-        </>
+        </Layout>
 
     );
 }

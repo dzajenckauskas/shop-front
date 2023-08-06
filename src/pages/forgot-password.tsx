@@ -17,7 +17,7 @@ import Header from '../../components/layout/header/Header';
 import Layout from '../../components/layout/Layout';
 
 
-export default function SignIn() {
+export default function ForgotPassword() {
     const router = useRouter();
 
 
@@ -64,9 +64,9 @@ export default function SignIn() {
                         <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Forgot password?
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%' }}>
                         <TextField
                             margin="normal"
                             required
@@ -77,34 +77,16 @@ export default function SignIn() {
                             autoComplete="email"
                             autoFocus
                         />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
+
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
+                            Reset password
                         </Button>
                         <Grid container>
-                            <Grid item xs>
-                                <Link href="/forgot-password" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
                             <Grid item>
                                 <Link href="/register" variant="body2">
                                     {"Don't have an account? Sign Up"}

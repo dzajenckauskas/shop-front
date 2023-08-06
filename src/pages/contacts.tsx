@@ -5,19 +5,16 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { getTheme } from '../../components/layout/Theme';
-import Header from '../../components/layout/header/Header';
 import Layout from '../../components/layout/Layout';
+import { getTheme } from '../../components/layout/Theme';
 
 
-export default function SignIn() {
+export default function Contacts() {
     const router = useRouter();
 
 
@@ -50,7 +47,7 @@ export default function SignIn() {
     const theme = getTheme()
     return (
         <Layout>
-            <Header />
+
             <Container component="main" maxWidth="xs">
                 <Box
                     sx={{
@@ -64,9 +61,29 @@ export default function SignIn() {
                         <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Contact us
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="firstName"
+                            label="First name"
+                            name="firstName"
+                            autoComplete="firstName"
+                            autoFocus
+                        />
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            id="phone"
+                            label="Phone"
+                            name="phone"
+                            autoComplete="phone"
+                            autoFocus
+                        />
                         <TextField
                             margin="normal"
                             required
@@ -81,15 +98,17 @@ export default function SignIn() {
                             margin="normal"
                             required
                             fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
+                            name="message"
+                            label="Message"
+                            type="text"
+                            id="message"
+                            multiline
+                            rows={8}
+                        // autoComplete="current-message"
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
+                            label="Agree with privacy policy"
                         />
                         <Button
                             type="submit"
@@ -97,20 +116,9 @@ export default function SignIn() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign In
+                            Contact
                         </Button>
-                        <Grid container>
-                            <Grid item xs>
-                                <Link href="/forgot-password" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
-                            <Grid item>
-                                <Link href="/register" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                </Link>
-                            </Grid>
-                        </Grid>
+
                     </Box>
                 </Box>
             </Container>

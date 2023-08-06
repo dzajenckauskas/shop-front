@@ -4,6 +4,7 @@ import Head from 'next/head';
 import BasicCard from '../../../components/BasicCard';
 import Header from '../../../components/layout/header/Header';
 import { ProductsResponseType } from '../../../components/shared/ProductTypes';
+import Layout from '../../../components/layout/Layout';
 // const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
@@ -23,11 +24,12 @@ export default function Home({ products }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Stack direction={'row'} sx={{ maxWidth: 'lg', mx: 'auto' }}
-        spacing={4}>
-
-        {renderProducts}
-      </Stack>
+      <Layout>
+        <Stack direction={'row'} sx={{ maxWidth: 'lg', mx: 'auto' }}
+          spacing={4}>
+          {renderProducts}
+        </Stack>
+      </Layout>
     </>
   )
 }
