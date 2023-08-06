@@ -1,9 +1,10 @@
 import Stack from '@mui/material/Stack';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getTheme } from './Theme';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 type Props = {
     children: React.ReactNode;
@@ -11,7 +12,26 @@ type Props = {
 
 const Layout = ({ children, }: Props) => {
     const theme = getTheme()
-    // TODO: add head tag to layout.
+    const router = useRouter()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(() => {
+        const jwt = sessionStorage.getItem('jwt');
+        console.log(sessionStorage, "sessionStorage");
+
+        if (jwt) {
+            setIsLoggedIn(true)
+        }
+        if (!jwt) {
+            setIsLoggedIn(false)
+            if (router.pathname !== '/login') {
+                console.log();
+                router.push('/login');
+
+            }
+        }
+    }, [router]);
+
     return (
         <>
             <Head>
@@ -25,11 +45,12 @@ const Layout = ({ children, }: Props) => {
                 backgroundColor: theme.palette.background.default,
                 position: 'relative'
             }}>
-                <Header />
+
+                <Header isLoggedIn={isLoggedIn} />
                 <Stack minHeight={'calc(100vh - 150px)'} sx={{
                     // backgroundColor: theme.palette.primary.dark,
                     // background: `linear-gradient(180deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
-                    // pt: '60px', maxWidth: '100vw', overflow: 'hidden'
+                    pt: '60px', maxWidth: '100vw', overflow: 'hidden'
 
                 }}>
                     {children}

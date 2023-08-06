@@ -2,10 +2,8 @@ import { Stack } from '@mui/material';
 import axios from 'axios';
 import Head from 'next/head';
 import BasicCard from '../../../components/BasicCard';
-import Header from '../../../components/layout/header/Header';
-import { ProductsResponseType } from '../../../components/shared/ProductTypes';
 import Layout from '../../../components/layout/Layout';
-// const inter = Inter({ subsets: ['latin'] })
+import { ProductsResponseType } from '../../../components/shared/ProductTypes';
 
 type Props = {
   products: ProductsResponseType
@@ -23,10 +21,8 @@ export default function Home({ products }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
       <Layout>
-        <Stack direction={'row'} sx={{ maxWidth: 'lg', mx: 'auto' }}
-          spacing={4}>
+        <Stack direction={'row'} sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }} spacing={4}>
           {renderProducts}
         </Stack>
       </Layout>

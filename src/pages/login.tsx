@@ -1,20 +1,17 @@
-import PixIcon from '@mui/icons-material/Pix';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { getTheme } from '../../components/layout/Theme';
-import Header from '../../components/layout/header/Header';
 import Layout from '../../components/layout/Layout';
+import { PageTitle } from '../../components/layout/Pagetitle';
 
 
 export default function SignIn() {
@@ -40,6 +37,8 @@ export default function SignIn() {
             .then(response => {
                 console.log('User profile', response.data.user);
                 console.log('User token', response.data.jwt);
+                sessionStorage.setItem('jwt', response.data.jwt);
+                router.push('/')
             })
             .catch(error => {
                 console.log('An error occurred:', error.response);
@@ -47,25 +46,12 @@ export default function SignIn() {
     };
 
 
-    const theme = getTheme()
     return (
         <Layout>
-            <Header />
-            <Container component="main" maxWidth="xs">
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: '#fff' }}>
-                        <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
+
+            <Container component="main" maxWidth="sm">
+                <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+                    <PageTitle title={'Sign in'} />
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
@@ -112,7 +98,7 @@ export default function SignIn() {
                             </Grid>
                         </Grid>
                     </Box>
-                </Box>
+                </Paper>
             </Container>
         </Layout>
     );

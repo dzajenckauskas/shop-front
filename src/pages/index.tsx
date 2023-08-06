@@ -2,7 +2,9 @@ import axios from 'axios';
 import Head from 'next/head';
 import BasicCard from '../../components/BasicCard';
 import Layout from '../../components/layout/Layout';
+import Stack from '@mui/material/Stack'
 import { ProductsResponseType } from '../../components/shared/ProductTypes';
+import Typography from '@mui/material/Typography'
 // const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
@@ -22,6 +24,12 @@ export default function Home({ products }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
+        <Stack maxWidth={'lg'} mx={'auto'}>
+          <Typography variant={'h1'} fontWeight={600} textAlign={'center'}>
+            {'Hello there!'}
+          </Typography>
+        </Stack>
+        {/* {renderProducts} */}
       </Layout>
     </>
   )

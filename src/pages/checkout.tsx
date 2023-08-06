@@ -11,7 +11,7 @@ import AddressForm from '../../components/forms/AddressForm';
 import PaymentForm from '../../components/forms/PaymentForm';
 import Review from '../../components/forms/Review';
 import Layout from '../../components/layout/Layout';
-
+import Link from 'next/link'
 
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -63,6 +63,19 @@ export default function Checkout() {
                                 confirmation, and will send you an update when your order has
                                 shipped.
                             </Typography>
+                            <Box mt={4}>
+                                <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                                    passHref href={`/products`}>
+                                    <Button
+                                        size="medium"
+                                        color="primary"
+                                        variant='contained'
+                                        aria-label={`View products`}
+                                    >
+                                        Shop more
+                                    </Button>
+                                </Link>
+                            </Box>
                         </React.Fragment>
                     ) : (
                         <React.Fragment>

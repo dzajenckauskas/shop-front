@@ -1,51 +1,66 @@
-import PixIcon from '@mui/icons-material/Pix';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { getTheme } from '../../components/layout/Theme';
-import Header from '../../components/layout/header/Header';
 import Layout from '../../components/layout/Layout';
-
+import { PageTitle } from '../../components/layout/Pagetitle';
+import { getTheme } from '../../components/layout/Theme';
+import axios from 'axios'
 
 
 const theme = getTheme();
 
 export default function Register() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     const data = new FormData(event.currentTarget);
+    //     console.log({
+    //         email: data.get('email'),
+    //         password: data.get('password'),
+    //     });
+    // };
+
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
-            email: data.get('email'),
+            identifier: data.get('email'),
             password: data.get('password'),
         });
+
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`,
+            {
+                identifier: 'dan',
+                password: 'dandan'
+                // identifier: data.get('email'),
+                // password: data.get('password'),
+            })
+            .then(response => {
+                console.log('User profile', response.data.user);
+                console.log('User token', response.data.jwt);
+                sessionStorage.setItem('jwt', response.data.jwt);
+                // router.push('/')
+            })
+            .catch(error => {
+                console.log('An error occurred:', error.response);
+            });
     };
+    // /api/users
 
     return (
         <Layout>
+            <Container component="main" maxWidth="sm">
+                <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
 
-            <Container component="main" maxWidth="xs" sx={{ backgroundColor: '#fff' }}>
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: '#fff' }}>
-                        <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
+
+                    <PageTitle title={'Sign up'} />
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -113,7 +128,7 @@ export default function Register() {
                             </Grid>
                         </Grid>
                     </Box>
-                </Box>
+                </Paper>
             </Container>
         </Layout>
 
