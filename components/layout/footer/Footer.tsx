@@ -26,13 +26,14 @@ export default function Footer() {
                             : theme.palette.grey[800],
                 }}
             >
-                <Container maxWidth="sm">
+                <Container maxWidth="lg">
                     <Link passHref href={'/'} style={{ display: 'flex', alignItems: 'center' }}>
-                        <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
+                        <PixIcon fontSize='large' sx={{ color: theme.palette.grey[400] }} />
                         <Typography variant='h6' sx={{ fontWeight: 500, color: theme.palette.grey[400] }}>
                             MyShop
                         </Typography>
                     </Link>
+
                 </Container>
             </Box>
         </Box>
