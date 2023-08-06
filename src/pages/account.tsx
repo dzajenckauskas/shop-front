@@ -19,6 +19,11 @@ export type AccountData = {
   username?: string;
   firstName?: string;
   lastName?: string;
+  city?: string;
+  country?: string;
+  postcode?: string;
+  address?: string;
+  address2?: string;
   subscribed?: boolean;
 }
 export default function Account() {
@@ -41,6 +46,11 @@ export default function Account() {
         email: data.get('email'),
         firstName: data.get('firstName'),
         lastName: data.get('lastName'),
+        address: data.get('address'),
+        address2: data.get('address2'),
+        country: data.get('country'),
+        city: data.get('city'),
+        postcode: data.get('postcode'),
         subscribed: data.get('subscribed')
       })
       .then((response) => {
@@ -77,36 +87,6 @@ export default function Account() {
                   InputLabelProps={{
                     shrink: true,
                   }}
-
-                  autoComplete="given-name"
-                  name="firstName"
-                  value={accountData?.firstName}
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant='standard'
-                  value={accountData?.lastName}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant='standard'
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
                   required
                   fullWidth
                   value={accountData?.username}
@@ -131,6 +111,94 @@ export default function Account() {
                   autoComplete="email"
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+
+                  autoComplete="given-name"
+                  name="firstName"
+                  value={accountData?.firstName}
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  value={accountData?.lastName}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  fullWidth
+                  value={accountData?.address}
+                  id="address"
+                  label="Address"
+                  name="address"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  fullWidth
+                  value={accountData?.city}
+                  id="city"
+                  label="City"
+                  name="city"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  fullWidth
+                  value={accountData?.country}
+                  id="country"
+                  label="Country"
+                  name="country"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  fullWidth
+                  value={accountData?.postcode}
+                  id="postcode"
+                  label="Postcode"
+                  name="postcode"
+                  autoComplete="family-name"
+                />
+              </Grid>
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value={accountData?.subscribed} color="primary" checked={accountData?.subscribed} name='subscribed' />}
