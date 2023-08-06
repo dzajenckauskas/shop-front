@@ -17,17 +17,13 @@ const Layout = ({ children, }: Props) => {
 
     useEffect(() => {
         const jwt = sessionStorage.getItem('jwt');
-        console.log(sessionStorage, "sessionStorage");
-
         if (jwt) {
             setIsLoggedIn(true)
         }
         if (!jwt) {
             setIsLoggedIn(false)
-            if (router.pathname !== '/login') {
-                console.log();
+            if ((router.pathname === '/account')) {
                 router.push('/login');
-
             }
         }
     }, [router]);
@@ -47,12 +43,10 @@ const Layout = ({ children, }: Props) => {
             }}>
 
                 <Header isLoggedIn={isLoggedIn} />
-                <Stack minHeight={'calc(100vh - 150px)'} sx={{
-                    // backgroundColor: theme.palette.primary.dark,
-                    // background: `linear-gradient(180deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
-                    pt: '60px', maxWidth: '100vw', overflow: 'hidden'
-
-                }}>
+                <Stack minHeight={'calc(100vh - 265px)'}
+                    sx={{
+                        pt: '60px', maxWidth: '100vw', overflow: 'hidden'
+                    }}>
                     {children}
                 </Stack>
 

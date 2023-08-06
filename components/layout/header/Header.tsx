@@ -71,7 +71,7 @@ export default function Header({ isLoggedIn }: Props) {
                     </Stack>
                 </Stack>
             </Container>
-            <Box sx={{ height: 85 }}>
+            <Box sx={{ height: 85, paddingBottom: 10 }}>
                 {/*  */}
             </Box>
         </>

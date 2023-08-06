@@ -12,12 +12,14 @@ export default function Footer() {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
+                paddingTop: 10
             }}
         >
             <Box
                 component="footer"
                 sx={{
-                    py: 3,
+                    height: 100,
+                    py: 4.5,
                     px: 2,
                     mt: 'auto',
                     backgroundColor: (theme) =>
