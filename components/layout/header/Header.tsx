@@ -12,6 +12,8 @@ import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 type Props = {
     isLoggedIn?: boolean;
 }
@@ -52,6 +54,11 @@ export default function Header({ isLoggedIn }: Props) {
                         <Link passHref href={'/wishlist'}>
                             <Avatar sx={{ bgcolor: '#fff', mr: -.5 }}>
                                 <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
+                            </Avatar>
+                        </Link>
+                        <Link passHref href={'/checkout'}>
+                            <Avatar sx={{ bgcolor: '#fff', mr: -.5 }}>
+                                <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
                             </Avatar>
                         </Link>
                         {isLoggedIn && <Link passHref href={'/account'}>

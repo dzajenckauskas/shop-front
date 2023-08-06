@@ -22,6 +22,7 @@ export type AccountData = {
   city?: string;
   country?: string;
   postcode?: string;
+  phone?: string;
   address?: string;
   address2?: string;
   subscribed?: boolean;
@@ -32,14 +33,6 @@ export default function Account() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const data = new FormData(event.currentTarget);
     event.preventDefault();
-    console.log({
-      username: data.get('username'),
-      email: data.get('email'),
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      subscribed: data.get('subscribed') ? true : false,
-    });
-
     axios
       .put(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${accountData?.id}`, {
         username: data.get('username'),
@@ -51,6 +44,7 @@ export default function Account() {
         country: data.get('country'),
         city: data.get('city'),
         postcode: data.get('postcode'),
+        phone: data.get('phone'),
         subscribed: data.get('subscribed')
       })
       .then((response) => {
@@ -111,6 +105,7 @@ export default function Account() {
                   autoComplete="email"
                 />
               </Grid>
+
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant='standard'
@@ -141,8 +136,35 @@ export default function Account() {
                   autoComplete="family-name"
                 />
               </Grid>
-
               <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  fullWidth
+                  value={accountData?.phone}
+                  id="phone"
+                  label="Phone"
+                  name="phone"
+                  autoComplete="phone"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='standard'
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  fullWidth
+                  value={accountData?.postcode}
+                  id="postcode"
+                  label="Postcode"
+                  name="postcode"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
                   variant='standard'
                   InputLabelProps={{
@@ -184,20 +206,7 @@ export default function Account() {
                   autoComplete="family-name"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant='standard'
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  fullWidth
-                  value={accountData?.postcode}
-                  id="postcode"
-                  label="Postcode"
-                  name="postcode"
-                  autoComplete="family-name"
-                />
-              </Grid>
+
 
               <Grid item xs={12}>
                 <FormControlLabel
