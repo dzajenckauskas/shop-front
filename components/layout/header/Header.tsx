@@ -40,7 +40,6 @@ export default function Header({ isLoggedIn }: Props) {
                         </Typography>
                     </Link>
                     <Stack direction={'row'} spacing={4} alignItems={'center'}>
-
                         <Link passHref href={'/products'}>
                             <Typography color={theme.palette.grey[400]}>
                                 Products
@@ -51,21 +50,24 @@ export default function Header({ isLoggedIn }: Props) {
                                 Contacts
                             </Typography>
                         </Link>
-                        <Link passHref href={'/wishlist'}>
-                            <Avatar sx={{ bgcolor: '#fff', mr: -.5 }}>
-                                <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
-                            </Avatar>
-                        </Link>
-                        <Link passHref href={'/checkout'}>
-                            <Avatar sx={{ bgcolor: '#fff', mr: -.5 }}>
-                                <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
-                            </Avatar>
-                        </Link>
-                        {isLoggedIn && <Link passHref href={'/account'}>
-                            <Avatar sx={{ bgcolor: '#fff', ml: -.5 }}>
-                                <AccountBoxIcon sx={{ color: theme.palette.secondary.main }} />
-                            </Avatar>
-                        </Link>}
+
+                        <Stack direction={'row'} spacing={1}>
+                            <Link passHref href={'/wishlist'}>
+                                <Avatar sx={{ bgcolor: '#fff', }}>
+                                    <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
+                                </Avatar>
+                            </Link>
+                            <Link passHref href={'/checkout'}>
+                                <Avatar sx={{ bgcolor: '#fff', }}>
+                                    <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
+                                </Avatar>
+                            </Link>
+                            {isLoggedIn && <Link passHref href={'/account'}>
+                                <Avatar sx={{ bgcolor: '#fff' }}>
+                                    <AccountBoxIcon sx={{ color: theme.palette.secondary.main }} />
+                                </Avatar>
+                            </Link>}
+                        </Stack>
                         {!isLoggedIn && <Link passHref href={'/login'}>
                             <Button variant='contained'>
                                 Login
