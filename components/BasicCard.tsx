@@ -1,16 +1,10 @@
-// import AspectRatio from '@mui/joy/AspectRatio';
-import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { ProductType } from './shared/ProductTypes';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { addToWishlist, removeFromWishlist, selectWishlist } from '../app/wishlistSlice';
-import { getTheme } from './layout/Theme';
 import { WishlistToggleButton } from './shared/WishlistToggleButton';
 
 type Props = {
@@ -18,8 +12,6 @@ type Props = {
 }
 
 export default function BasicCard({ product }: Props) {
-
-
     return (
         <Card variant="outlined" sx={{ padding: 2 }}>
             <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>

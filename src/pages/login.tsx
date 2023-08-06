@@ -3,19 +3,22 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { useAppDispatch } from '../../app/hooks';
 import Layout from '../../components/layout/Layout';
 import { PageTitle } from '../../components/layout/Pagetitle';
+import { performLogin } from '../../components/shared/auth/accountSlice';
 
 
 export default function SignIn() {
-    const router = useRouter();
+    const dispatch = useAppDispatch();
+    const router = useRouter()
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -28,15 +31,13 @@ export default function SignIn() {
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`,
             {
                 identifier: 'dan',
-                password: 'dandan'
+                password: 'Testuojam123?'
                 // identifier: data.get('email'),
                 // password: data.get('password'),
             })
             .then(response => {
-                // console.log('User profile', response.data.user);
-                // console.log('User token', response.data.jwt);
                 sessionStorage.setItem('jwt', response.data.jwt);
-                sessionStorage.setItem('userId', response.data.user.id);
+                dispatch(performLogin(response.data));
                 router.push('/')
             })
             .catch(error => {
@@ -47,7 +48,6 @@ export default function SignIn() {
 
     return (
         <Layout>
-
             <Container component="main" maxWidth="sm">
                 <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                     <PageTitle title={'Sign in'} />

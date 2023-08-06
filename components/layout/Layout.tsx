@@ -2,7 +2,6 @@ import Stack from '@mui/material/Stack';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getTheme } from './Theme';
 import Footer from './footer/Footer';
 import Header from './header/Header';
 

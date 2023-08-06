@@ -2,6 +2,8 @@ import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/t
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import { webStorage } from './createWebStore';
 import { wishlistReducer } from '../wishlistSlice';
+import { cartReducer } from '../../components/shared/cart/cartSlice';
+import { accountReducer } from '../../components/shared/auth/accountSlice';
 
 const persistConfig = {
     key: 'root',
@@ -10,8 +12,8 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-    // account: accountReducer,
-    // cart: cartReducer,
+    account: accountReducer,
+    cart: cartReducer,
     wishlist: wishlistReducer,
 })
 

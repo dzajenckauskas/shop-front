@@ -5,6 +5,7 @@ import Layout from '../../components/layout/Layout';
 import Stack from '@mui/material/Stack'
 import { ProductsResponseType } from '../../components/shared/ProductTypes';
 import Typography from '@mui/material/Typography'
+import { PageTitle } from '../../components/layout/Pagetitle';
 // const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
@@ -16,22 +17,11 @@ export default function Home({ products }: Props) {
     <BasicCard product={p} />
   ))
   return (
-    <>
-      <Head>
-        <title>Shop</title>
-        <meta name="description" content={"This is my shop"} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-        <Stack maxWidth={'lg'} mx={'auto'}>
-          <Typography variant={'h1'} fontWeight={600} textAlign={'center'}>
-            {'Hello there!'}
-          </Typography>
-        </Stack>
-        {/* {renderProducts} */}
-      </Layout>
-    </>
+    <Layout>
+      <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}>
+        <PageTitle main title='Welcome to myShop' />
+      </Stack>
+    </Layout>
   )
 }
 

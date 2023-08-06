@@ -3,16 +3,29 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
-import Link from 'next/link'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import Layout from '../../../components/layout/Layout'
 import { ProductType } from '../../../components/shared/ProductTypes'
 import { WishlistToggleButton } from '../../../components/shared/WishlistToggleButton'
+import { CartItemType } from '../../../components/shared/cart/CartTypes'
+import { addItemToCart, selectCart } from '../../../components/shared/cart/cartSlice'
 
 type Props = {
   product: ProductType
 }
 
 export default function Home({ product }: Props) {
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector(selectCart)
+  console.log(cart, "cart");
+
+  const handleAddToCart = () => {
+    const cartItem: CartItemType = {
+      product: product,
+      qty: 1
+    }
+    dispatch(addItemToCart(cartItem));
+  }
   return (
     <Layout>
       <Stack direction={'column'} width={'100%'} sx={{ maxWidth: 'lg', mx: 'auto', p: { sm: 4, xs: 2 } }}
@@ -39,20 +52,17 @@ export default function Home({ product }: Props) {
               ${product.attributes.price.toFixed(2)}
             </Typography>
           </Stack>
-          <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
-            passHref href={`/checkout`}>
-            <Button
-
-              size="medium"
-              color="primary"
-              variant='contained'
-              aria-label={`View ${product.attributes.title} product`}
-            >
-              Buy
-            </Button>
-          </Link>
+          <Button
+            onClick={handleAddToCart}
+            sx={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
+            size="medium"
+            color="primary"
+            variant='contained'
+            aria-label={`View ${product.attributes.title} product`}
+          >
+            Buy
+          </Button>
         </Stack>
-
       </Stack>
     </Layout>
   )

@@ -1,18 +1,18 @@
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Link from 'next/link'
-import Container from '@mui/material/Container'
-import PixIcon from '@mui/icons-material/Pix';
-import Button from '@mui/material/Button';
-import { getTheme } from '../Theme';
-import { useRouter } from 'next/router';
-import TurnedInNotIcon from '@mui/icons-material/TurnedInNot';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import PixIcon from '@mui/icons-material/Pix';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useAppDispatch } from '../../../app/hooks';
+import { logout } from '../../shared/auth/accountSlice';
+import { getTheme } from '../Theme';
 
 type Props = {
     isLoggedIn?: boolean;
@@ -22,8 +22,10 @@ type Props = {
 export default function Header({ isLoggedIn }: Props) {
     const theme = getTheme()
     const router = useRouter();
+    const dispatch = useAppDispatch()
     const handleLogOut = () => {
-
+        dispatch(logout);
+        router.push('/login');
         sessionStorage.removeItem('jwt');
         router.push('/login');
     }
@@ -36,7 +38,7 @@ export default function Header({ isLoggedIn }: Props) {
                             <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
                         </Avatar>
                         <Typography variant='h6' sx={{ fontWeight: 500, color: theme.palette.grey[400] }}>
-                            MyShop
+                            myShop
                         </Typography>
                     </Link>
                     <Stack direction={'row'} spacing={4} alignItems={'center'}>
@@ -74,7 +76,7 @@ export default function Header({ isLoggedIn }: Props) {
                             </Button>
                         </Link>}
                         {isLoggedIn &&
-                            <Button variant='contained' onClick={() => handleLogOut()}>
+                            <Button variant='contained' onClick={handleLogOut}>
                                 Log out
                             </Button>}
                     </Stack>
