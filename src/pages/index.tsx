@@ -1,11 +1,9 @@
+import Stack from '@mui/material/Stack';
 import axios from 'axios';
-import Head from 'next/head';
 import BasicCard from '../../components/BasicCard';
 import Layout from '../../components/layout/Layout';
-import Stack from '@mui/material/Stack'
-import { ProductsResponseType } from '../../components/shared/ProductTypes';
-import Typography from '@mui/material/Typography'
 import { PageTitle } from '../../components/layout/Pagetitle';
+import { ProductsResponseType } from '../../components/shared/ProductTypes';
 // const inter = Inter({ subsets: ['latin'] })
 
 type Props = {
@@ -19,7 +17,7 @@ export default function Home({ products }: Props) {
   return (
     <Layout>
       <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}>
-        <PageTitle main title='Welcome to myShop' />
+        <PageTitle main title='Welcome to localShop' />
       </Stack>
     </Layout>
   )

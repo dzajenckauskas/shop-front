@@ -38,7 +38,7 @@ export default function Header({ isLoggedIn }: Props) {
                             <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
                         </Avatar>
                         <Typography variant='h6' sx={{ fontWeight: 500, color: theme.palette.grey[400] }}>
-                            myShop
+                            localShop
                         </Typography>
                     </Link>
                     <Stack direction={'row'} spacing={4} alignItems={'center'}>

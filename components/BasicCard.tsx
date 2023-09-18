@@ -16,7 +16,7 @@ export default function BasicCard({ product }: Props) {
         <Card variant="outlined" sx={{ padding: 2 }}>
             <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
                 <Box>
-                    <Typography variant='h6' fontWeight={600}>{product.attributes.title}</Typography>
+                    <Typography variant='h6' fontWeight={600}>{product.attributes?.title}</Typography>
                     <Typography variant='body2' fontWeight={400}>April 24 to May 02, 2021</Typography>
                 </Box>
                 <WishlistToggleButton product={product} />
@@ -33,17 +33,17 @@ export default function BasicCard({ product }: Props) {
                 <Stack spacing={.25} >
                     <Typography variant='caption'>Price:</Typography>
                     <Typography variant='h6'>
-                        ${product.attributes.price.toFixed(2)}
+                        ${product.attributes?.price.toFixed(2)}
                     </Typography>
                 </Stack>
                 <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
-                    passHref href={`/products/${product.attributes.slug}`}>
+                    passHref href={`/products/${product.attributes?.slug}`}>
                     <Button
 
                         size="medium"
                         color="primary"
                         variant='contained'
-                        aria-label={`View ${product.attributes.title} product`}
+                        aria-label={`View ${product.attributes?.title} product`}
                     >
                         View
                     </Button>

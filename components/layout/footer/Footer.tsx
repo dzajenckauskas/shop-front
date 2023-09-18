@@ -32,7 +32,7 @@ export default function Footer() {
                     <Link passHref href={'/'} style={{ display: 'flex', alignItems: 'center' }}>
                         <PixIcon fontSize='large' sx={{ color: theme.palette.grey[400], mr: .5 }} />
                         <Typography variant='h6' sx={{ fontWeight: 500, color: theme.palette.grey[400] }}>
-                            myShop
+                            localShop
                         </Typography>
                     </Link>
 
