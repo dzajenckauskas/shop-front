@@ -15,6 +15,8 @@ type Props = {
 }
 
 export default function Home({ product }: Props) {
+  console.log(product, "product");
+
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCart)
   console.log(cart, "cart");
@@ -39,8 +41,7 @@ export default function Home({ product }: Props) {
         </Stack>
         <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
           <img
-            src="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286"
-            srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+            src={product.attributes.shopify.image.src}
             loading="lazy"
             alt=""
           />
@@ -85,11 +86,11 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context: any) => {
   const product = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[slug][$eq]=${context.params.slug}`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context.params.slug}`
   )
   return {
     props: {
-      product: product.data.data[0]
+      product: product.data.data
     }
   }
 }

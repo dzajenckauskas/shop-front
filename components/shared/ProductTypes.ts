@@ -20,5 +20,10 @@ export type ProductAttributesType = {
     quantity: number;
     createdAt: string;
     updatedAt: string;
+    shopify: ProductShopifyType;
+}
+
+export type ProductShopifyType = {
+    image: { src: string; }
 }
 
