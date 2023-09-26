@@ -4,7 +4,6 @@ import PixIcon from '@mui/icons-material/Pix';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -13,7 +12,7 @@ import { useRouter } from 'next/router';
 import { useAppDispatch } from '../../../app/hooks';
 import { logout } from '../../shared/auth/accountSlice';
 import { getTheme } from '../Theme';
-
+import Button from '@mui/material/Button'
 type Props = {
     isLoggedIn?: boolean;
 }

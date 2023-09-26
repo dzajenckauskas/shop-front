@@ -1,11 +1,11 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { ProductType } from './shared/ProductTypes';
 import { WishlistToggleButton } from './shared/WishlistToggleButton';
+import Button from '@mui/material/Button'
 
 type Props = {
     product: ProductType;
@@ -39,8 +39,7 @@ export default function BasicCard({ product }: Props) {
                 <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
                     passHref href={`/products/${product.attributes?.slug}`}>
                     <Button
-
-                        size="medium"
+                        size="large"
                         color="primary"
                         variant='contained'
                         aria-label={`View ${product.attributes?.title} product`}

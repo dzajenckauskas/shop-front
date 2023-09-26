@@ -35,13 +35,13 @@ export default function Home({ product }: Props) {
         <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
           <Box>
             <Typography variant='h6' fontWeight={600}>{product.attributes.title}</Typography>
-            <Typography variant='body2' fontWeight={400}>April 24 to May 02, 2021</Typography>
+            <Typography variant='body2' fontWeight={400}>{product.attributes.createdAt}</Typography>
           </Box>
           <WishlistToggleButton product={product} />
         </Stack>
         <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
           <img
-            src={product.attributes.shopify.image.src}
+            src={product.attributes.shopify?.image.src}
             loading="lazy"
             alt=""
           />
