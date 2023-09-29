@@ -9,7 +9,8 @@ const initialState: LoggedInAccountType = {
         firstName: undefined,
         lastName: undefined,
         username: undefined
-    }
+    },
+    token: undefined
 }
 
 export const accountSlice = createSlice({

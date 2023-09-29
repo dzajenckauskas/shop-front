@@ -1,4 +1,5 @@
 export type LoggedInAccountType = {
+    token: string | null | undefined;
     jwt?: string;
     isLoggedIn: boolean;
     user: LoggedInAccountUserType;
