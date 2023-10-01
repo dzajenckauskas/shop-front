@@ -99,7 +99,7 @@ function Home({ products }) {
     });
 }
 const getStaticProps = async (context)=>{
-    const products = await external_axios_default().get(`${"http://154.49.136.99:1338"}/api/products`);
+    const products = await external_axios_default().get(`${"http://154.49.136.99:1339"}/api/products`);
     return {
         props: {
             products: products.data

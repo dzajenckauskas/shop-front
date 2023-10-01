@@ -92,7 +92,7 @@ const getStaticProps = async (context)=>{
     //   shopName: process.env.SHOPIFY_SECRET_SHOPNAME ?? '',
     //   accessToken: process.env.SHOPIFY_SECRET_API ?? ''
     // });
-    const products = await external_axios_default().get(`${"http://154.49.136.99:1338"}/api/products`);
+    const products = await external_axios_default().get(`${"http://154.49.136.99:1339"}/api/products`);
     // await shopify.order
     //   .get(5727615123802)
     //   .then((data) => console.log(data, 'data'))
