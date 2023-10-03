@@ -5,7 +5,7 @@ exports.id = 888;
 exports.ids = [888];
 exports.modules = {
 
-/***/ 1403:
+/***/ 6042:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -179,7 +179,7 @@ module.exports = require("redux-persist/lib/storage/createWebStorage");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [312,798], () => (__webpack_exec__(1403)));
+var __webpack_exports__ = __webpack_require__.X(0, [312,798], () => (__webpack_exec__(6042)));
 module.exports = __webpack_exports__;
 
 })();
