@@ -28,44 +28,12 @@ export default function AddressForm() {
                 Shipping address
             </Typography>
             <Grid container spacing={2} pt={1}>
-                {/* <Grid item xs={12} sm={6}>
-                    <TextField
-                        variant='standard'
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        required
-                        fullWidth
-                        value={accountData?.username}
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="family-name"
-                    />
-                </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
                         variant='standard'
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        required
-                        fullWidth
-                        value={accountData?.email}
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                    />
-                </Grid> */}
-
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        variant='standard'
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-
                         autoComplete="given-name"
                         name="firstName"
                         value={accountData?.firstName}
