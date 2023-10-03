@@ -6,6 +6,8 @@ import { PageTitle } from '../../components/layout/Pagetitle';
 import { ProductsResponseType } from '../../components/shared/ProductTypes';
 // const inter = Inter({ subsets: ['latin'] })
 import Shopify from 'shopify-api-node';
+import Link from 'next/link';
+import Button from '@mui/material/Button'
 
 type Props = {
   products: ProductsResponseType
@@ -17,8 +19,17 @@ export default function Home({ products }: Props) {
   ))
   return (
     <Layout>
-      <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}>
+      <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}
+        spacing={4}>
         <PageTitle main title='Welcome to localShop' />
+        <Stack direction={'row'} spacing={4}>
+          {renderProducts}
+        </Stack>
+        <Link passHref href={'/products'}>
+          <Button variant='contained' >
+            See all products
+          </Button>
+        </Link>
       </Stack>
     </Layout>
   )

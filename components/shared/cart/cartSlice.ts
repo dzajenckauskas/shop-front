@@ -2,11 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItemType, CartType } from './CartTypes';
 import { RootState } from '../../../app/store/store';
 import { calculateCartTotals } from './calculateCartTotals';
-// import { CouponType } from '../coupons/CouponType';
-// import { ShippingRateType } from '../shipping/ShippingRateTypes';
-// import { ShippingMethodType } from '../shipping/ShippingTypes';
-// import { TaxRateType } from '../taxe-rates/TaxRatesTypes';
-// import { calculateCartTotals } from './calculateCartTotals';
 
 const initialState: CartType = {
   quantity: 0,

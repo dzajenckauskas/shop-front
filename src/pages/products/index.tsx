@@ -9,7 +9,7 @@ type Props = {
   products: ProductsResponseType
 }
 
-export default function Home({ products }: Props) {
+export default function ProductsList({ products }: Props) {
   const renderProducts = products.data.map((p) => (
     <BasicCard product={p} key={p.id} />
   ))
@@ -17,7 +17,7 @@ export default function Home({ products }: Props) {
     <>
       <Layout>
         <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}>
-          <PageTitle main title='Products' />
+          <PageTitle main title='All products' />
           <Stack direction={'row'} sx={{ width: '100%' }} spacing={4}>
             {renderProducts}
           </Stack>

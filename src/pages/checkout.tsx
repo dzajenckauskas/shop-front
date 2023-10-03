@@ -13,17 +13,20 @@ import Review from '../../components/forms/Review';
 import Layout from '../../components/layout/Layout';
 import Link from 'next/link'
 import { PageTitle } from '../../components/layout/Pagetitle';
+import { CheckoutItems } from '../../components/CheckoutItems';
 
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Checkout', 'Shipping', 'Payment', 'Review'];
 
 function getStepContent(step: number) {
     switch (step) {
         case 0:
-            return <AddressForm />;
+            return <CheckoutItems />;
         case 1:
-            return <PaymentForm />;
+            return <AddressForm />;
         case 2:
+            return <PaymentForm />;
+        case 3:
             return <Review />;
         default:
             throw new Error('Unknown step');

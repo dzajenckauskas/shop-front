@@ -5,7 +5,7 @@ import { CartType } from "./CartTypes";
 export const calculateCartTotals = (cart: Draft<CartType>) => {
   const totals = cart.items.reduce((p, c) => {
     p.quantity += c.qty
-    p.subtotal += c.qty * c.product.attributes.price
+    p.subtotal += c.qty * c.product.attributes?.price
     return p
   }, {
     quantity: 0,

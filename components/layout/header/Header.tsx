@@ -9,10 +9,16 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { logout } from '../../shared/auth/accountSlice';
 import { getTheme } from '../Theme';
 import Button from '@mui/material/Button'
+import { useState } from 'react';
+import { selectCart } from '../../shared/cart/cartSlice';
+import { calculateCartTotals } from '../../shared/cart/calculateCartTotals';
+import Card from '@mui/material/Card';
+import { selectWishlist } from '../../../app/wishlistSlice';
+
 type Props = {
     isLoggedIn?: boolean;
 }
@@ -24,10 +30,76 @@ export default function Header({ isLoggedIn }: Props) {
     const dispatch = useAppDispatch()
     const handleLogOut = () => {
         dispatch(logout);
-        router.push('/login');
         sessionStorage.removeItem('jwt');
         router.push('/login');
     }
+    const [openCartDropdown, setOpenCartDropdown] = useState(false)
+
+    const toggleCartDropdown = () => {
+        setOpenCartDropdown(!openCartDropdown)
+    }
+    const [openWishlistDropdown, setOpenWishlistDropdown] = useState(false)
+
+    const toggleWishlistDropdown = () => {
+        setOpenWishlistDropdown(!openWishlistDropdown)
+    }
+
+
+    const cart = useAppSelector(selectCart)
+    const wishlist = useAppSelector(selectWishlist)
+
+    const renderWishlistItems = wishlist.products.map((ci) => {
+        return (
+            <Stack direction={'row'} pt={1} key={ci.id}>
+                <Stack spacing={.25} >
+                    <Typography variant='h6'>
+                        {ci.attributes?.price?.toFixed(2)} Eur
+                    </Typography>
+                </Stack>
+                <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                    passHref href={`/products/${ci.attributes?.slug}`}>
+
+                    <Typography variant='caption'> {ci.attributes?.title}</Typography>
+                </Link>
+            </Stack>
+            // <Stack key={ci.id} direction={'row'} sx={{ justifyContent: 'space-between' }}>
+            //     <Typography>
+            //         {ci.product.attributes?.title}
+            //     </Typography>
+            //     <Typography>
+            //         {ci.product.attributes?.price?.toFixed(2)} Eur
+            //     </Typography>
+            // </Stack>
+
+        )
+    })
+    const renderCartItems = cart.items.map((ci) => {
+        return (
+            <Stack direction={'row'} pt={1} key={ci.id}>
+                <Stack spacing={.25} >
+                    <Typography variant='h6'>
+                        {ci.product.attributes?.price?.toFixed(2)} Eur
+                    </Typography>
+                </Stack>
+                <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                    passHref href={`/products/${ci.product.attributes?.slug}`}>
+
+                    <Typography variant='caption'> {ci.product.attributes?.title}</Typography>
+                </Link>
+            </Stack>
+            // <Stack key={ci.id} direction={'row'} sx={{ justifyContent: 'space-between' }}>
+            //     <Typography>
+            //         {ci.product.attributes?.title}
+            //     </Typography>
+            //     <Typography>
+            //         {ci.product.attributes?.price?.toFixed(2)} Eur
+            //     </Typography>
+            // </Stack>
+
+        )
+    })
+    const sumWithInitial = cart.items.reduce((a, c) => a + (c.product.attributes.price * c.qty), 0);
+
     return (
         <>
             <Container maxWidth={false} sx={{ zIndex: 99, position: 'fixed', top: 0, alignItems: 'center', width: '100%', backgroundColor: theme.palette.background.default }}>
@@ -53,16 +125,16 @@ export default function Header({ isLoggedIn }: Props) {
                         </Link>
 
                         <Stack direction={'row'} spacing={1}>
-                            <Link passHref href={'/wishlist'}>
-                                <Avatar sx={{ bgcolor: '#fff', }}>
-                                    <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
-                                </Avatar>
-                            </Link>
-                            <Link passHref href={'/checkout'}>
-                                <Avatar sx={{ bgcolor: '#fff', }}>
-                                    <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
-                                </Avatar>
-                            </Link>
+                            {/* <Link passHref href={'/wishlist'}> */}
+                            {renderWishlistItems?.length > 0 && <Avatar sx={{ bgcolor: '#fff', }} onClick={toggleWishlistDropdown}>
+                                <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
+                            </Avatar>}
+                            {/* </Link> */}
+                            {/* <Link passHref href={'/checkout'}> */}
+                            <Avatar sx={{ bgcolor: '#fff', cursor: 'pointer' }} onClick={toggleCartDropdown}>
+                                <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
+                            </Avatar>
+                            {/* </Link> */}
                             {isLoggedIn && <Link passHref href={'/account'}>
                                 <Avatar sx={{ bgcolor: '#fff' }}>
                                     <AccountBoxIcon sx={{ color: theme.palette.secondary.main }} />
@@ -79,10 +151,63 @@ export default function Header({ isLoggedIn }: Props) {
                                 Log out
                             </Button>}
                     </Stack>
+                    {openCartDropdown &&
+                        <Card sx={{ backgroundColor: '#fff', width: 300, position: 'fixed', zIndex: 9, right: 0, top: 70, p: 3 }}>
+                            <Typography variant='h6' fontWeight={700}>
+                                {"Cart"}
+                            </Typography>
+                            <Stack spacing={1} py={3}>
+                                {renderCartItems}
+                            </Stack>
+                            <Stack spacing={1} pb={2} sx={{ borderTop: '1px solid black' }} pt={1}>
+                                <Stack direction={'row'} sx={{ justifyContent: 'space-between' }}>
+                                    <Typography variant='subtitle1' fontWeight={500}>
+                                        {'Cart total:'}
+                                    </Typography>
+                                    <Typography variant='subtitle1' fontWeight={500}>
+                                        {sumWithInitial.toFixed(2)} Eur
+                                    </Typography>
+                                </Stack>
+
+                            </Stack>
+                            <Link passHref href={'/checkout'}>
+                                <Button variant='contained' >
+                                    Go to checkout
+                                </Button>
+                            </Link>
+                        </Card>
+                    }
+                    {openWishlistDropdown &&
+                        <Card sx={{ backgroundColor: '#fff', width: 300, position: 'fixed', zIndex: 9, right: 0, top: 70, p: 3 }}>
+                            <Typography variant='h6' fontWeight={700}>
+                                {"Wishlist"}
+                            </Typography>
+                            <Stack spacing={1} py={3}>
+                                {renderWishlistItems}
+                            </Stack>
+                            {/* <Stack spacing={1} pb={2} sx={{ borderTop: '1px solid black' }} pt={1}>
+                                <Stack direction={'row'} sx={{ justifyContent: 'space-between' }}>
+                                    <Typography variant='subtitle1' fontWeight={500}>
+                                        {'Wishlist total:'}
+                                    </Typography>
+                                    <Typography variant='subtitle1' fontWeight={500}>
+                                        {sumWithInitial.toFixed(2)} Eur
+                                    </Typography>
+                                </Stack>
+
+                            </Stack> */}
+                            <Link passHref href={'/wishlist'}>
+                                <Button variant='contained' >
+                                    See wishlist
+                                </Button>
+                            </Link>
+                        </Card>
+                    }
                 </Stack>
             </Container>
-            <Box sx={{ height: 85 }}>
+            <Box sx={{ height: 70 }}>
             </Box>
+
         </>
     );
 }
