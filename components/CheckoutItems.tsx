@@ -22,7 +22,7 @@ export const CheckoutItems = () => {
                 </Box>
                 <Box>
                     <Typography variant='subtitle1'>
-                        {ci.product.attributes?.price?.toFixed(2)} Eur
+                        {ci.product.attributes?.price}
                     </Typography>
                 </Box>
             </Stack>
@@ -45,7 +45,7 @@ export const CheckoutItems = () => {
                         {'Cart total:'}
                     </Typography>
                     <Typography variant='subtitle1' fontWeight={500}>
-                        {sumWithInitial.toFixed(2)} Eur
+                        {sumWithInitial}
                     </Typography>
                 </Stack>
 

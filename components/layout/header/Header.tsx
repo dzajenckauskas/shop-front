@@ -75,27 +75,22 @@ export default function Header({ isLoggedIn }: Props) {
     })
     const renderCartItems = cart.items.map((ci) => {
         return (
-            <Stack direction={'row'} pt={1} key={ci.id}>
-                <Stack spacing={.25} >
-                    <Typography variant='h6'>
-                        {ci.product.attributes?.price?.toFixed(2)} Eur
+            <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'}>
+                <Box>
+                    <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                        passHref href={`/products/${ci.product.attributes?.slug}`}>
+                        <Typography variant='subtitle1'> {ci.product.attributes?.title}</Typography>
+                    </Link>
+                </Box>
+                <Box>
+                    <Typography variant='caption'> {ci.qty}</Typography>
+                </Box>
+                <Box>
+                    <Typography variant='subtitle1'>
+                        {ci.product.attributes?.price}
                     </Typography>
-                </Stack>
-                <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
-                    passHref href={`/products/${ci.product.attributes?.slug}`}>
-
-                    <Typography variant='caption'> {ci.product.attributes?.title}</Typography>
-                </Link>
+                </Box>
             </Stack>
-            // <Stack key={ci.id} direction={'row'} sx={{ justifyContent: 'space-between' }}>
-            //     <Typography>
-            //         {ci.product.attributes?.title}
-            //     </Typography>
-            //     <Typography>
-            //         {ci.product.attributes?.price?.toFixed(2)} Eur
-            //     </Typography>
-            // </Stack>
-
         )
     })
     const sumWithInitial = cart.items.reduce((a, c) => a + (c.product.attributes.price * c.qty), 0);
@@ -165,7 +160,7 @@ export default function Header({ isLoggedIn }: Props) {
                                         {'Cart total:'}
                                     </Typography>
                                     <Typography variant='subtitle1' fontWeight={500}>
-                                        {sumWithInitial.toFixed(2)} Eur
+                                        {sumWithInitial}
                                     </Typography>
                                 </Stack>
 
@@ -185,17 +180,6 @@ export default function Header({ isLoggedIn }: Props) {
                             <Stack spacing={1} py={3}>
                                 {renderWishlistItems}
                             </Stack>
-                            {/* <Stack spacing={1} pb={2} sx={{ borderTop: '1px solid black' }} pt={1}>
-                                <Stack direction={'row'} sx={{ justifyContent: 'space-between' }}>
-                                    <Typography variant='subtitle1' fontWeight={500}>
-                                        {'Wishlist total:'}
-                                    </Typography>
-                                    <Typography variant='subtitle1' fontWeight={500}>
-                                        {sumWithInitial.toFixed(2)} Eur
-                                    </Typography>
-                                </Stack>
-
-                            </Stack> */}
                             <Link passHref href={'/wishlist'}>
                                 <Button variant='contained' >
                                     See wishlist

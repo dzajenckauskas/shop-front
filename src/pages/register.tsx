@@ -27,7 +27,7 @@ export default function Register() {
                 username: data.get('username'),
                 email: data.get('email'),
                 password: data.get('password'),
-                subscribed: data.get('subscribed'),
+                allowExtraEmails: data.get('subscribed'),
             })
             .then(response => {
                 console.log('User profile', response.data.user);
