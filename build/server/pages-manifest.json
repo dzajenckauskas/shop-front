@@ -1,0 +1,19 @@
+{
+  "/_app": "pages/_app.js",
+  "/account": "pages/account.html",
+  "/_document": "pages/_document.js",
+  "/api/hello": "pages/api/hello.js",
+  "/contacts": "pages/contacts.html",
+  "/_error": "pages/_error.js",
+  "/change-password": "pages/change-password.html",
+  "/login": "pages/login.html",
+  "/register": "pages/register.html",
+  "/wishlist": "pages/wishlist.html",
+  "/checkout": "pages/checkout.html",
+  "/forgot-password": "pages/forgot-password.html",
+  "/email-confirmed": "pages/email-confirmed.html",
+  "/products": "pages/products.js",
+  "/": "pages/index.js",
+  "/products/[slug]": "pages/products/[slug].js",
+  "/404": "pages/404.html"
+}
