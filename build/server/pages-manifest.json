@@ -9,9 +9,15 @@
   "/contacts": "pages/contacts.html",
   "/email-confirmed": "pages/email-confirmed.html",
   "/forgot-password": "pages/forgot-password.html",
+<<<<<<< HEAD
   "/register": "pages/register.html",
   "/wishlist": "pages/wishlist.html",
   "/login": "pages/login.html",
+=======
+  "/login": "pages/login.html",
+  "/register": "pages/register.html",
+  "/wishlist": "pages/wishlist.html",
+>>>>>>> fbf3845e46a3eae7a0a3b16472868f94e69385b0
   "/": "pages/index.js",
   "/products/[slug]": "pages/products/[slug].js",
   "/products": "pages/products.js",
