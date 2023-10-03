@@ -1,5 +1,6 @@
 {
   "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/account": "pages/account.html",
   "/api/hello": "pages/api/hello.js",
@@ -11,9 +12,8 @@
   "/login": "pages/login.html",
   "/register": "pages/register.html",
   "/wishlist": "pages/wishlist.html",
-  "/_error": "pages/_error.js",
+  "/": "pages/index.js",
   "/products/[slug]": "pages/products/[slug].js",
   "/products": "pages/products.js",
-  "/": "pages/index.js",
   "/404": "pages/404.html"
 }
