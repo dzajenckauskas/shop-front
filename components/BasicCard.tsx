@@ -6,12 +6,17 @@ import Link from 'next/link';
 import { ProductType } from './shared/ProductTypes';
 import { WishlistToggleButton } from './shared/WishlistToggleButton';
 import Button from '@mui/material/Button'
+import { useAppSelector } from '../app/hooks';
+import { selectCart } from './shared/cart/cartSlice';
 
 type Props = {
     product: ProductType;
 }
 
 export default function BasicCard({ product }: Props) {
+    const cart = useAppSelector(selectCart)
+    const cartItem = cart.items.find((ci) => ci.product.id === product.id)
+
     return (
         <Card variant="outlined" sx={{ padding: 2 }}>
             <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
@@ -19,6 +24,9 @@ export default function BasicCard({ product }: Props) {
                     <Typography variant='h6' fontWeight={600}>{product.attributes?.title}</Typography>
                     <Typography variant='body2' fontWeight={400}>April 24 to May 02, 2021</Typography>
                 </Box>
+                {
+
+                }
                 <WishlistToggleButton product={product} />
             </Stack>
             <Stack minHeight="120px" maxHeight="200px" py={1}>
@@ -40,7 +48,7 @@ export default function BasicCard({ product }: Props) {
                     passHref href={`/products/${product.attributes?.slug}`}>
                     <Button
                         size="large"
-                        color="primary"
+                        color={!!cartItem ? "secondary" : 'primary'}
                         variant='contained'
                         aria-label={`View ${product.attributes?.title} product`}
                     >
