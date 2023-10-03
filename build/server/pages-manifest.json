@@ -1,19 +1,8 @@
 {
-  "/account": "pages/account.html",
-  "/api/hello": "pages/api/hello.js",
-  "/change-password": "pages/change-password.html",
-  "/_document": "pages/_document.js",
-  "/contacts": "pages/contacts.html",
-  "/email-confirmed": "pages/email-confirmed.html",
-  "/forgot-password": "pages/forgot-password.html",
-  "/login": "pages/login.html",
-  "/_error": "pages/_error.js",
   "/_app": "pages/_app.js",
-  "/register": "pages/register.html",
-  "/checkout": "pages/checkout.html",
-  "/wishlist": "pages/wishlist.html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/products": "pages/products.js",
-  "/products/[slug]": "pages/products/[slug].js",
-  "/404": "pages/404.html"
+  "/account": "pages/account.js",
+  "/products/[slug]": "pages/products/[slug].js"
 }

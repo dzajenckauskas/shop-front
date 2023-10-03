@@ -16,7 +16,6 @@ type Props = {
 export default function BasicCard({ product }: Props) {
     const cart = useAppSelector(selectCart)
     const cartItem = cart.items.find((ci) => ci.product.id === product.id)
-
     return (
         <Card variant="outlined" sx={{ padding: 2 }}>
             <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
