@@ -9,6 +9,7 @@ import { ProductType } from '../../../components/shared/ProductTypes'
 import { WishlistToggleButton } from '../../../components/shared/WishlistToggleButton'
 import { CartItemType } from '../../../components/shared/cart/CartTypes'
 import { addItemToCart, selectCart } from '../../../components/shared/cart/cartSlice'
+import React from 'react'
 
 type Props = {
     product: ProductType
@@ -41,8 +42,7 @@ export default function ProductView({ product }: Props) {
                 </Stack>
                 <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
                     <img
-                        src="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286"
-                        srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
+                        src={product.attributes.images.data[0]?.attributes.url}
                         loading="lazy"
                         alt=""
                     />
