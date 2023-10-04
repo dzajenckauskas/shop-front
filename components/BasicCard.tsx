@@ -35,8 +35,8 @@ export default function BasicCard({ product }: Props) {
                 <Image
                     fill
                     objectFit='cover'
-                    alt={product.attributes.images.data[0].attributes.alternativeText ?? ''}
-                    src={product.attributes.images.data[0]?.attributes.url}
+                    alt={product.attributes.images?.data[0].attributes.alternativeText ?? ''}
+                    src={product.attributes.images?.data[0]?.attributes.url}
                 />
             </Stack>
             <Stack direction={'row'} pt={1}>

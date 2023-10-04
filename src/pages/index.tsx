@@ -8,6 +8,7 @@ import { ProductsResponseType } from '../../components/shared/ProductTypes';
 import Shopify from 'shopify-api-node';
 import Link from 'next/link';
 import Button from '@mui/material/Button'
+import React from 'react';
 
 type Props = {
   products: ProductsResponseType
