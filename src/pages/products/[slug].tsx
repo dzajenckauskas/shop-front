@@ -42,7 +42,7 @@ export default function ProductView({ product }: Props) {
                 </Stack>
                 <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
                     <img
-                        src={product?.attributes.images.data[0]?.attributes?.url}
+                        src={product?.attributes.images?.data[0]?.attributes?.url}
                         loading="lazy"
                         alt=""
                     />

@@ -4,12 +4,11 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { AccountData } from '@/pages/account';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function AddressForm() {
-    const [accountData, setAccountData] = useState<AccountData>()
+    const [accountData, setAccountData] = useState<any>()
 
     useEffect(() => {
         const id = sessionStorage.getItem('userId');
