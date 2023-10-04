@@ -3,13 +3,12 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch } from '../../../app/hooks'
 import Layout from '../../../components/layout/Layout'
 import { ProductType } from '../../../components/shared/ProductTypes'
 import { WishlistToggleButton } from '../../../components/shared/WishlistToggleButton'
 import { CartItemType } from '../../../components/shared/cart/CartTypes'
-import { addItemToCart, selectCart } from '../../../components/shared/cart/cartSlice'
-import React from 'react'
+import { addItemToCart } from '../../../components/shared/cart/cartSlice'
 
 type Props = {
     product?: ProductType;
@@ -19,8 +18,7 @@ export default function ProductView({ product }: Props) {
     console.log(product, "product");
 
     const dispatch = useAppDispatch();
-    const cart = useAppSelector(selectCart)
-    console.log(cart, "cart");
+    // const cart = useAppSelector(selectCart)
 
     const handleAddToCart = () => {
         const cartItem: CartItemType = {
@@ -87,7 +85,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context: any) => {
     const product = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context.params.slug}?populate=*`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context.params.slug}?populate=deep`
     )
     return {
         props: {
