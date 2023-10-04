@@ -42,7 +42,7 @@ export const getStaticProps = async (context: any) => {
   //   accessToken: process.env.SHOPIFY_SECRET_API ?? ''
   // });
 
-  const products = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
+  const products = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?populate=*`)
 
 
   // await shopify.order

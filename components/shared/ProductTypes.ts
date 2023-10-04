@@ -20,7 +20,36 @@ export type ProductAttributesType = {
     quantity: number;
     createdAt: string;
     updatedAt: string;
+    images: ProductImagesType;
     shopify: ProductShopifyType;
+}
+
+export type ProductImagesType = {
+    data: ImageType[];
+}
+
+export type ImageType = {
+    id: number;
+    attributes: ImageAttributesType;
+}
+
+export type ImageAttributesType = {
+    alternativeText: string | null;
+    caption: string | null;
+    createdAt: string;
+    ext: string;
+    formats: null;
+    hash: string;
+    height: null;
+    mime: string;
+    name: string;
+    previewUrl: null;
+    provider: string;
+    provider_metadata: null;
+    size: number;
+    updatedAt: string;
+    url: string;
+    width: null;
 }
 
 export type ProductShopifyType = {
