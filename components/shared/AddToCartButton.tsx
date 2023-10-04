@@ -4,15 +4,14 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addToWishlist, removeFromWishlist, selectWishlist } from "../../app/wishlistSlice";
 import { getTheme } from "../layout/Theme";
 import { ProductType } from "./ProductTypes";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import React from 'react';
-import { HtmlTooltip } from '../BasicCard';
-import Typography from '@mui/material/Typography';
 
 type Props = {
     product?: ProductType;
 }
 
-export const WishlistToggleButton = ({ product }: Props) => {
+export const AddToCartButton = ({ product }: Props) => {
     const dispatch = useAppDispatch();
     const theme = getTheme()
     const wishlist = useAppSelector(selectWishlist);
@@ -23,20 +22,12 @@ export const WishlistToggleButton = ({ product }: Props) => {
             likedItem ? dispatch(removeFromWishlist(product)) : dispatch(addToWishlist(product));
     }
     return (
-        <HtmlTooltip
-            title={
-                <React.Fragment>
-                    <Typography color="inherit">
-                        {likedItem ? 'Is in wishlist!' : 'Add to wishlist'}
-                    </Typography>
-                </React.Fragment>}>
-            <IconButton
-                size="small"
-                onClick={handleLike}
-            >
-                {likedItem && <BookmarkAdd sx={{ color: theme.palette.secondary.main }} />}
-                {!likedItem && <BookmarkAdd sx={{ color: theme.palette.grey[500] }} />}
-            </IconButton>
-        </HtmlTooltip>
+        <IconButton
+            size="small"
+            onClick={handleLike}
+        >
+            {likedItem && <AddShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />}
+            {!likedItem && <AddShoppingCartIcon sx={{ color: theme.palette.grey[500] }} />}
+        </IconButton>
     )
 }

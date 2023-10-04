@@ -28,7 +28,7 @@ export default function ProductsList({ products }: Props) {
 }
 
 export const getStaticProps = async (context: any) => {
-  const products = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
+  const products = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?populate=deep`)
 
   return {
     props: {

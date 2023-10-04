@@ -13,15 +13,15 @@ import Review from '../../components/forms/Review';
 import Layout from '../../components/layout/Layout';
 import Link from 'next/link'
 import { PageTitle } from '../../components/layout/Pagetitle';
-import { CheckoutItems } from '../../components/CheckoutItems';
+import { CartItems } from '../../components/CartItems';
 
 
-const steps = ['Checkout', 'Shipping', 'Payment', 'Review'];
+const steps = ['Cart', 'Shipping', 'Payment', 'Review'];
 
 function getStepContent(step: number) {
     switch (step) {
         case 0:
-            return <CheckoutItems />;
+            return <CartItems />;
         case 1:
             return <AddressForm />;
         case 2:

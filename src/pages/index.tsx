@@ -22,7 +22,9 @@ export default function Home({ products }: Props) {
     <Layout>
       <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}
         spacing={4}>
-        <PageTitle main title='Welcome to localShop' />
+        <Stack py={6}>
+          <PageTitle main title='Welcome to localShop' />
+        </Stack>
         <Stack direction={'row'} spacing={4}>
           {renderProducts}
         </Stack>
