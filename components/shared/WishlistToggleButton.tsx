@@ -4,19 +4,21 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addToWishlist, removeFromWishlist, selectWishlist } from "../../app/wishlistSlice";
 import { getTheme } from "../layout/Theme";
 import { ProductType } from "./ProductTypes";
+import React from 'react';
 
 type Props = {
-    product: ProductType;
+    product?: ProductType;
 }
 
 export const WishlistToggleButton = ({ product }: Props) => {
     const dispatch = useAppDispatch();
     const theme = getTheme()
     const wishlist = useAppSelector(selectWishlist);
-    const likedItem = wishlist.products.find((o) => o.id === product.id) !== undefined;
+    const likedItem = wishlist.products.find((o) => o.id === product?.id) !== undefined;
 
     const handleLike = () => {
-        likedItem ? dispatch(removeFromWishlist(product)) : dispatch(addToWishlist(product));
+        if (product)
+            likedItem ? dispatch(removeFromWishlist(product)) : dispatch(addToWishlist(product));
     }
     return (
         <IconButton

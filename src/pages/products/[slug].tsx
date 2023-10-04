@@ -12,7 +12,7 @@ import { addItemToCart, selectCart } from '../../../components/shared/cart/cartS
 import React from 'react'
 
 type Props = {
-    product: ProductType
+    product?: ProductType;
 }
 
 export default function ProductView({ product }: Props) {
@@ -24,7 +24,7 @@ export default function ProductView({ product }: Props) {
 
     const handleAddToCart = () => {
         const cartItem: CartItemType = {
-            product: product,
+            product: product ?? {} as ProductType,
             qty: 1
         }
         dispatch(addItemToCart(cartItem));
@@ -35,14 +35,14 @@ export default function ProductView({ product }: Props) {
                 spacing={4}>
                 <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
                     <Box>
-                        <Typography variant='h6' fontWeight={600}>{product.attributes.title}</Typography>
-                        <Typography variant='body2' fontWeight={400}>{product.attributes.createdAt}</Typography>
+                        <Typography variant='h6' fontWeight={600}>{product?.attributes?.title}</Typography>
+                        {/* <Typography variant='body2' fontWeight={400}>{product?.attributes?.createdAt}</Typography> */}
                     </Box>
                     <WishlistToggleButton product={product} />
                 </Stack>
                 <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
                     <img
-                        src={product.attributes.images.data[0]?.attributes.url}
+                        src={product?.attributes.images.data[0]?.attributes?.url}
                         loading="lazy"
                         alt=""
                     />
@@ -51,7 +51,7 @@ export default function ProductView({ product }: Props) {
                     <Stack spacing={.25} >
                         <Typography variant='caption'>Price:</Typography>
                         <Typography variant='h6'>
-                            ${product.attributes.price.toFixed(2)}
+                            ${product?.attributes?.price?.toFixed(2)}
                         </Typography>
                     </Stack>
                     <Button
@@ -60,7 +60,7 @@ export default function ProductView({ product }: Props) {
                         size="medium"
                         color="primary"
                         variant='contained'
-                        aria-label={`View ${product.attributes.title} product`}
+                        aria-label={`View ${product?.attributes?.title} product`}
                     >
                         Add to cart
                     </Button>
@@ -87,11 +87,11 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context: any) => {
     const product = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context.params.slug}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context.params.slug}?populate=*`
     )
     return {
         props: {
-            product: product.data.data
+            product: product?.data?.data
         }
     }
 }
