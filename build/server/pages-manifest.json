@@ -2,5 +2,18 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js"
+  "/api/hello": "pages/api/hello.js",
+  "/checkout": "pages/checkout.html",
+  "/change-password": "pages/change-password.html",
+  "/email-confirmed": "pages/email-confirmed.html",
+  "/account": "pages/account.html",
+  "/contacts": "pages/contacts.html",
+  "/login": "pages/login.html",
+  "/forgot-password": "pages/forgot-password.html",
+  "/register": "pages/register.html",
+  "/wishlist": "pages/wishlist.html",
+  "/products": "pages/products.js",
+  "/": "pages/index.js",
+  "/products/[slug]": "pages/products/[slug].js",
+  "/404": "pages/404.html"
 }
