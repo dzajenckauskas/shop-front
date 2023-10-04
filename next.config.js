@@ -26,7 +26,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ["127.0.0.1", '45.93.138.46', 'localhost', 'www.api.localshop', "localshop", "api.localshop"]
+    domains: ["127.0.0.1", '154.49.136.99', 'localhost', 'www.api.localshop', "localshop", "api.localshop"]
   },
   webpack(config) {
     config.module.rules.push({
