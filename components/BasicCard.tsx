@@ -9,6 +9,7 @@ import Button from '@mui/material/Button'
 import { useAppSelector } from '../app/hooks';
 import { selectCart } from './shared/cart/cartSlice';
 import Image from 'next/image';
+import React from 'react';
 
 type Props = {
     product: ProductType;
