@@ -16,8 +16,8 @@ export default function ProductsList({ products }: Props) {
   return (
     <>
       <Layout>
-        <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}>
-          <PageTitle main title='All products' />
+        <Stack spacing={4} sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}>
+          <PageTitle title='All products' />
           <Stack direction={'row'} sx={{ width: '100%' }} spacing={4}>
             {renderProducts}
           </Stack>

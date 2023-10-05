@@ -1,19 +1,18 @@
-import Box from '@mui/material/Box';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
+import { useAppSelector } from '../app/hooks';
+import { getTheme } from './layout/Theme';
 import { ProductType } from './shared/ProductTypes';
 import { WishlistToggleButton } from './shared/WishlistToggleButton';
-import Button from '@mui/material/Button'
-import { useAppSelector } from '../app/hooks';
 import { selectCart } from './shared/cart/cartSlice';
-import Image from 'next/image';
-import React from 'react';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { getTheme } from './layout/Theme';
-import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
 
 type Props = {
     product: ProductType;
@@ -31,12 +30,12 @@ export const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
 }));
 
 export default function BasicCard({ product }: Props) {
-    console.log(product.attributes.images);
     const theme = getTheme()
     const cart = useAppSelector(selectCart)
     const cartItem = cart.items.find((ci) => ci.product.id === product.id)
+
     return (
-        <Card variant="outlined" sx={{ padding: 2, position: 'relative' }}>
+        <Card variant="outlined" sx={{ padding: 2, width: '100%', maxWidth: { lg: '25%', md: '33%', sm: '50%', xs: '100%' }, position: 'relative' }}>
             <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'} sx={{
                 position: 'absolute', zIndex: 1, left: 16
             }}>
@@ -55,13 +54,16 @@ export default function BasicCard({ product }: Props) {
                     <AddShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
                 </HtmlTooltip>
             </Stack>}
-            <Stack minHeight="200px" maxHeight="400px" py={1} position={'relative'} sx={{ minWidth: 300 }}>
-                <Image
-                    fill
-                    objectFit='cover'
-                    alt={product.attributes.images?.data[0].attributes.alternativeText ?? ''}
-                    src={product.attributes.images?.data[0]?.attributes.url}
-                />
+            <Stack sx={{ overflow: 'hidden' }}>
+                <Stack minHeight="200px" py={1} position={'relative'} sx={{ ':hover img': { transform: 'scale(1.25)' } }}>
+                    <Image
+                        fill
+                        objectFit='contain'
+                        objectPosition='center'
+                        alt={product.attributes.images?.data[0].attributes.alternativeText ?? ''}
+                        src={product.attributes.images?.data[0]?.attributes.url}
+                    />
+                </Stack>
             </Stack>
             <Typography variant='h6' fontWeight={600} py={1}>{product.attributes?.title}</Typography>
             <Stack direction={'row'} alignItems={'flex-end'}>
@@ -74,7 +76,7 @@ export default function BasicCard({ product }: Props) {
                 <Link style={{ marginLeft: 'auto', alignSelf: 'flex-end', fontWeight: 600 }}
                     passHref href={`/products/${product.attributes?.slug}`}>
                     <Button
-                        size="large"
+                        size="small"
                         color={'primary'}
                         variant='contained'
                         aria-label={`View ${product.attributes?.title} product`}

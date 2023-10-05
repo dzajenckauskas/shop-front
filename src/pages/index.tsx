@@ -4,58 +4,56 @@ import BasicCard from '../../components/BasicCard';
 import Layout from '../../components/layout/Layout';
 import { PageTitle } from '../../components/layout/Pagetitle';
 import { ProductsResponseType } from '../../components/shared/ProductTypes';
-// const inter = Inter({ subsets: ['latin'] })
-import Shopify from 'shopify-api-node';
+import Button from '@mui/material/Button';
 import Link from 'next/link';
-import Button from '@mui/material/Button'
-import React from 'react';
 
 type Props = {
-  products: ProductsResponseType
+  newProducts: ProductsResponseType
+  popularProducts: ProductsResponseType
 }
 
-export default function Home({ products }: Props) {
-  const renderProducts = products.data.map((p) => (
+export default function Home({ newProducts, popularProducts }: Props) {
+  const renderNewProducts = newProducts.data.map((p) => (
+    <BasicCard product={p} key={p.id} />
+  ))
+  const renderPopularProducts = popularProducts.data.map((p) => (
     <BasicCard product={p} key={p.id} />
   ))
   return (
     <Layout>
       <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 } }}
         spacing={4}>
-        <Stack py={6}>
+
+        <Stack sx={{ alignItems: 'center', justifyContent: 'center', minHeight: '50vh' }}>
           <PageTitle main title='Welcome to localShop' />
+          <Link passHref href={'/products'}>
+            <Button variant='outlined' >
+              See all products
+            </Button>
+          </Link>
         </Stack>
+
+        <PageTitle title='New products' />
         <Stack direction={'row'} spacing={4}>
-          {renderProducts}
+          {renderNewProducts}
         </Stack>
-        <Link passHref href={'/products'}>
-          <Button variant='contained' >
-            See all products
-          </Button>
-        </Link>
+        <PageTitle title='Popular products' />
+        <Stack direction={'row'} spacing={4}>
+          {renderPopularProducts}
+        </Stack>
       </Stack>
     </Layout>
   )
 }
 
-export const getStaticProps = async (context: any) => {
-
-  // const shopify = new Shopify({
-  //   shopName: process.env.SHOPIFY_SECRET_SHOPNAME ?? '',
-  //   accessToken: process.env.SHOPIFY_SECRET_API ?? ''
-  // });
-
-  const products = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?populate=*`)
-
-
-  // await shopify.order
-  //   .get(5727615123802)
-  //   .then((data) => console.log(data, 'data'))
-  //   .catch((err) => console.error(err, 'err'))
+export const getStaticProps = async () => {
+  const popularProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isPopular][$eq]=${true}&populate=*`)
+  const newProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isNew][$eq]=${true}&populate=*`)
 
   return {
     props: {
-      products: products.data
+      newProducts: newProducts.data,
+      popularProducts: popularProducts.data
     }
   }
 }
