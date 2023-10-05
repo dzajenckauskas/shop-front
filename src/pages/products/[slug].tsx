@@ -9,6 +9,8 @@ import { ProductType } from '../../../components/shared/ProductTypes'
 import { WishlistToggleButton } from '../../../components/shared/WishlistToggleButton'
 import { CartItemType } from '../../../components/shared/cart/CartTypes'
 import { addItemToCart } from '../../../components/shared/cart/cartSlice'
+import Image from 'next/image';
+import { PageTitle } from '../../../components/layout/Pagetitle'
 
 type Props = {
     product?: ProductType;
@@ -33,16 +35,17 @@ export default function ProductView({ product }: Props) {
                 spacing={4}>
                 <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'}>
                     <Box>
-                        <Typography variant='h6' fontWeight={600}>{product?.attributes?.title}</Typography>
-                        {/* <Typography variant='body2' fontWeight={400}>{product?.attributes?.createdAt}</Typography> */}
+                        <PageTitle title={product?.attributes?.title ?? ''} />
                     </Box>
                     <WishlistToggleButton product={product} />
                 </Stack>
-                <Stack py={1} maxHeight={'50vh'} overflow={'hidden'}>
-                    <img
-                        src={product?.attributes.images?.data[0]?.attributes?.url}
-                        loading="lazy"
-                        alt=""
+                <Stack py={1} position={'relative'} height={'40vh'} >
+                    <Image
+                        fill
+                        objectFit='contain'
+                        objectPosition='center'
+                        alt={product?.attributes.images?.data[0].attributes.alternativeText ?? ''}
+                        src={product?.attributes.images?.data[0]?.attributes.url ?? ''}
                     />
                 </Stack>
                 <Stack direction={'row'} pt={1}>
