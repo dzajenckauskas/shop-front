@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
-import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import AddressForm from '../../components/forms/AddressForm';
 import PaymentForm from '../../components/forms/PaymentForm';
@@ -14,6 +14,7 @@ import Layout from '../../components/layout/Layout';
 import Link from 'next/link'
 import { PageTitle } from '../../components/layout/Pagetitle';
 import { CartItems } from '../../components/CartItems';
+import axios from 'axios';
 
 
 const steps = ['Cart', 'Shipping', 'Payment', 'Review'];
@@ -35,6 +36,7 @@ function getStepContent(step: number) {
 
 export default function Checkout() {
     const [activeStep, setActiveStep] = React.useState(0);
+    const [accountData, setAccountData] = React.useState<any>()
 
     const handleNext = () => {
         setActiveStep(activeStep + 1);
@@ -43,9 +45,47 @@ export default function Checkout() {
     const handleBack = () => {
         setActiveStep(activeStep - 1);
     };
+
+    React.useEffect(() => {
+        const id = sessionStorage.getItem('userId');
+        axios
+            .get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}?populate=*`)
+            .then((response) => {
+                console.log(response.data, 'GET response');
+
+                setAccountData(response.data)
+            })
+            .catch(err => console.log(`Error: ${err}`))
+    }, [])
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        // const data = new FormData(event.currentTarget);
+        // console.log(data, "data");
+
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`,
+            {
+                data: {
+                    orderTotal: 100
+                }
+                // username: data.get('username'),
+                // username: data.get('username'),
+                // email: data.get('email'),
+                // password: data.get('password'),
+                // allowExtraEmails: data.get('subscribed'),
+            })
+            .then(response => {
+                // console.log('User profile', response.data.user);
+                console.log('data', response.data);
+                // sessionStorage.setItem('jwt', response.data.jwt);
+                // router.push('/login')
+            })
+            .catch(error => {
+                console.log('An error occurred:', error.response);
+            });
+    };
     return (
         <Layout>
-            <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+            <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
                 <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
                     <PageTitle title='Checkout' />
                     <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
@@ -55,7 +95,25 @@ export default function Checkout() {
                             </Step>
                         ))}
                     </Stepper>
-                    {activeStep === steps.length ? (
+                    <CartItems />
+                    <AddressForm accountData={accountData} />
+                    {/* <PaymentForm /> */}
+                    <Review accountData={accountData} />
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        {/* {activeStep !== 0 && (
+                            <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                                Back
+                            </Button>
+                        )} */}
+                        <Button
+                            variant="contained"
+                            onClick={(e: any) => handleSubmit(e)}
+                            sx={{ mt: 3, ml: 1 }}
+                        >
+                            {'Place order'}
+                        </Button>
+                    </Box>
+                    {/* {activeStep === steps.length ? (
                         <React.Fragment>
                             <Typography variant="h5" gutterBottom>
                                 Thank you for your order.
@@ -97,7 +155,8 @@ export default function Checkout() {
                                 </Button>
                             </Box>
                         </React.Fragment>
-                    )}
+                    )} */}
+
                 </Paper>
             </Container>
         </Layout>

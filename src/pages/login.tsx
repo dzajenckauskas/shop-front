@@ -23,20 +23,15 @@ export default function SignIn() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            identifier: data.get('email'),
-            password: data.get('password'),
-        });
-
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`,
             {
-                identifier: 'dan',
-                password: 'Testuojam123?'
-                // identifier: data.get('email'),
-                // password: data.get('password'),
+                identifier: data.get('email'),
+                password: data.get('password'),
             })
             .then(response => {
                 sessionStorage.setItem('jwt', response.data.jwt);
+                sessionStorage.setItem('userId', response.data.user.id);
+
                 dispatch(performLogin(response.data));
                 router.push('/')
             })
