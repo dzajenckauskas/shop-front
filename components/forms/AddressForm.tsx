@@ -7,20 +7,24 @@ import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function AddressForm() {
-    const [accountData, setAccountData] = useState<any>()
+type Props = {
+    accountData?: AccounDataType;
+}
 
-    useEffect(() => {
-        const id = sessionStorage.getItem('userId');
-        axios
-            .get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}?populate=*`)
-            .then((response) => {
-                console.log(response.data, 'GET response');
+export type AccounDataType = {
+    firstName: string;
+    lastName: string;
+    phone: string;
+    postcode: string;
+    address: string;
+    city: string;
+    country: string;
+    subscribed: boolean;
+}
 
-                setAccountData(response.data)
-            })
-            .catch(err => console.log(`Error: ${err}`))
-    }, [])
+export default function AddressForm({ accountData }: Props) {
+
+
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>

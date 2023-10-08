@@ -14,7 +14,20 @@ import { getTheme } from '../layout/Theme';
 import { CartItemType } from '../shared/cart/CartTypes';
 import { removeItemFromCart, selectCart } from '../shared/cart/cartSlice';
 
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
+type Props = {
+    accountData?: AccounDataType;
+}
+
+export type AccounDataType = {
+    firstName: string;
+    lastName: string;
+    phone: string;
+    postcode: string;
+    address: string;
+    city: string;
+    country: string;
+    subscribed: boolean;
+}
 const payments = [
     { name: 'Card type', detail: 'Visa' },
     { name: 'Card holder', detail: 'Mr John Smith' },
@@ -22,7 +35,7 @@ const payments = [
     { name: 'Expiry date', detail: '04/2024' },
 ];
 
-export default function Review() {
+export default function Review({ accountData }: Props) {
     const dispatch = useAppDispatch();
     const cart = useAppSelector(selectCart)
     const theme = getTheme();
@@ -88,10 +101,10 @@ export default function Review() {
                     <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                         Shipping
                     </Typography>
-                    <Typography gutterBottom>John Smith</Typography>
-                    <Typography gutterBottom>{addresses.join(', ')}</Typography>
+                    <Typography gutterBottom>{accountData?.firstName} {accountData?.lastName}</Typography>
+                    <Typography gutterBottom>{accountData?.address}, {accountData?.city}, {accountData?.postcode}, {accountData?.country}</Typography>
                 </Grid>
-                <Grid item container direction="column" xs={12} sm={6}>
+                {/* <Grid item container direction="column" xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                         Payment details
                     </Typography>
@@ -107,7 +120,7 @@ export default function Review() {
                             </React.Fragment>
                         ))}
                     </Grid>
-                </Grid>
+                </Grid> */}
             </Grid>
         </React.Fragment>
     );
