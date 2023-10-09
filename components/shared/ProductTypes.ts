@@ -21,6 +21,7 @@ export type ProductAttributesType = {
     createdAt: string;
     updatedAt: string;
     images: ProductImagesType;
+    shortDescription: string;
     shopify: ProductShopifyType;
 }
 

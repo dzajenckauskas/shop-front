@@ -15,10 +15,10 @@ import { getTheme } from '../../components/layout/Theme';
 type Props = {
   newProducts: ProductsResponseType
   popularProducts: ProductsResponseType
-  heroBanner: any
+  // heroBanner?: any
 }
 
-export default function Home({ newProducts, popularProducts, heroBanner }: Props) {
+export default function Home({ newProducts, popularProducts }: Props) {
   const theme = getTheme()
 
   // const renderNewProducts = newProducts.data.map((p) => (
@@ -28,29 +28,29 @@ export default function Home({ newProducts, popularProducts, heroBanner }: Props
     <BasicCard product={p} key={p.id} />
   ))
 
-  const renderBanners = heroBanner?.data.attributes.banner.map((b: any) => {
-    return (
-      <Stack key={b.images.data[0].id} sx={{ position: 'relative', width: '100%', backgroundColor: theme.palette.secondary.main, height: '50vh', }}>
-        <Stack position={'absolute'} sx={{ pt: 22, zIndex: 1, alignItems: { md: 'center', xs: 'flex-start' }, width: '100%', px: { sm: 4, xs: 2 }, justifyItems: 'flex-start' }}>
-          <Typography variant='h1' fontWeight={500} color={theme.palette.secondary.main}>
-            {b.title}
-          </Typography>
-          <Typography variant='subtitle1' color={theme.palette.secondary.main}>
-            {b.subtitle}
-          </Typography>
-          <Link passHref href={'/products'}>
-            <Button variant='contained' color='secondary' sx={{ mt: 4 }}>
-              View products
-            </Button>
-          </Link>
-        </Stack>
-        <Image src={b.images?.data[0]?.attributes.url ?? ''} alt={''} fill objectFit='cover' objectPosition='top' />
-      </Stack>
-    )
-  })
+  // const renderBanners = heroBanner?.data.attributes.banner.map((b: any) => {
+  //   return (
+  //     <Stack key={b.images.data[0].id} sx={{ position: 'relative', width: '100%', backgroundColor: theme.palette.secondary.main, height: { md: '50vh', xs: '70vh' }, }}>
+  //       <Stack position={'absolute'} sx={{ pt: 22, zIndex: 1, alignItems: { md: 'center', xs: 'flex-start' }, width: '100%', px: { sm: 4, xs: 2 }, justifyItems: 'flex-start' }}>
+  //         <Typography variant='h1' fontWeight={500} color={theme.palette.secondary.main}>
+  //           {b.title}
+  //         </Typography>
+  //         <Typography variant='subtitle1' color={theme.palette.secondary.main}>
+  //           {b.subtitle}
+  //         </Typography>
+  //         <Link passHref href={'/products'}>
+  //           <Button variant='contained' color='secondary' sx={{ mt: 4 }}>
+  //             View products
+  //           </Button>
+  //         </Link>
+  //       </Stack>
+  //       <Image src={b.images?.data[0]?.attributes.url ?? ''} alt={''} fill objectFit='cover' objectPosition='top' />
+  //     </Stack>
+  //   )
+  // })
   return (
     <Layout>
-      <AliceCarousel disableDotsControls disableButtonsControls items={renderBanners} />
+      {/* <AliceCarousel disableDotsControls disableButtonsControls items={renderBanners} /> */}
       <Stack sx={{ maxWidth: 'lg', mx: 'auto', width: '100%', px: { sm: 4, xs: 2 }, pt: { sm: 4, xs: 2 } }}
         spacing={4}>
         {/* <PageTitle title='New products' /> */}
@@ -72,15 +72,15 @@ export default function Home({ newProducts, popularProducts, heroBanner }: Props
 }
 
 export const getStaticProps = async () => {
-  const popularProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isPopular][$eq]=${true}&populate=*`)
-  const newProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isNew][$eq]=${true}&populate=*`)
-  const heroBanner = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/hero-banner?populate=deep`)
+  const popularProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isPopular][$eq]=${true}&populate=*`).catch((err) => console.log(err))
+  const newProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products?filters[isNew][$eq]=${true}&populate=*`).catch((err) => console.log(err))
+  const heroBanner = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/hero-banner?populate=deep`).catch((err) => console.log(err))
 
   return {
     props: {
-      newProducts: newProducts.data,
-      popularProducts: popularProducts.data,
-      heroBanner: heroBanner.data,
+      newProducts: newProducts?.data,
+      popularProducts: popularProducts?.data,
+      heroBanner: heroBanner?.data ?? null,
     }
   }
 }

@@ -38,7 +38,10 @@ export default function ProductView({ product }: Props) {
                 spacing={4}>
 
                 <Stack direction={{ md: 'row', xs: 'column' }} spacing={4}>
-                    <Stack py={1} position={'relative'} height={'40vh'} width={'100%'} sx={{ border: '1px solid #000' }}>
+                    <Stack py={1} position={'relative'} height={'40vh'} width={'100%'}>
+                        <Box sx={{ position: 'absolute', zIndex: 9 }}>
+                            <WishlistToggleButton product={product} />
+                        </Box>
                         <Image
                             fill
                             objectFit='contain'
@@ -48,21 +51,19 @@ export default function ProductView({ product }: Props) {
                         />
                     </Stack>
                     <Stack alignItems={'flex-start'} justifyContent={'space-between'} width={'100%'}>
-                        <Box>
-                            <WishlistToggleButton product={product} />
-                            <Typography variant='h2' fontWeight={500} color={theme.palette.secondary.main}>
-                                {product?.attributes?.title ?? ''}
-                            </Typography>
-                        </Box>
+                        <Typography variant='h3' fontWeight={500}>
+                            {product?.attributes?.title ?? ''}
+                        </Typography>
+                        {/* <Typography variant='caption'>Price:</Typography> */}
+                        <Typography variant='h6'>
+                            €{product?.attributes?.price?.toFixed(2)}
+                        </Typography>
+                        <Typography variant='body1' py={2}>
+                            {product?.attributes?.shortDescription ?? ''}
+                        </Typography>
 
                         <Stack direction={'column'} pt={1} spacing={2}>
                             <NumberInput amount={quantity} setAmount={setQuantity} minValue={0} />
-                            <Stack spacing={.25} >
-                                <Typography variant='caption'>Price:</Typography>
-                                <Typography variant='h6'>
-                                    ${product?.attributes?.price?.toFixed(2)}
-                                </Typography>
-                            </Stack>
                             <Button
                                 onClick={handleAddToCart}
                                 sx={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}

@@ -16,7 +16,7 @@ export const NumberInput = ({ amount, setAmount, minValue, maxValue }: Props) =>
       <IconButton sx={{ height: 30, width: 30 }} aria-label="decrease" size="small" onClick={() => setAmount(amount === minValue ? minValue : (amount - 1))}>
         <RemoveIcon fontSize="small" />
       </IconButton>
-      <Stack sx={{ maxWidth: 40 }}>
+      <Stack sx={{ maxWidth: amount >= 10 ? 50 : 40 }}>
         <TextField
           size='small'
           sx={{
@@ -30,7 +30,6 @@ export const NumberInput = ({ amount, setAmount, minValue, maxValue }: Props) =>
           type='number'
           InputProps={{ inputProps: { min: minValue ?? 0, max: maxValue ?? null } }}
           value={amount}
-          id="phone"
         />
       </Stack>
       <IconButton sx={{ height: 30, width: 30 }} aria-label="increase" size="small" onClick={() => setAmount(amount + 1)}>
