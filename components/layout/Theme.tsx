@@ -109,12 +109,12 @@ export const Theme = createTheme({
         h6: {
             lineHeight: '24px'
         },
-        h1: {
-            fontSize: '50px'
-        },
-        subtitle1: {
-            fontWeight: 300
-        }
+        // h1: {
+        //     fontSize: '50px'
+        // },
+        // subtitle1: {
+        //     fontWeight: 300
+        // }
 
     },
     palette: {
