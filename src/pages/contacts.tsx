@@ -54,7 +54,7 @@ export default function Contacts() {
 
             <Container component="main" maxWidth="sm">
                 <Paper variant="outlined" sx={{ backgroundColor: '#fff', my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-                    <PageTitle title={'Contact us'} />
+                    <PageTitle title={'Contact us!'} />
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
                         <TextField

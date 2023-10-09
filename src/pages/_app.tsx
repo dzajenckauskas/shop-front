@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import 'react-alice-carousel/lib/alice-carousel.css';
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from "@mui/material/styles";
 import { getTheme } from '../../components/layout/Theme';

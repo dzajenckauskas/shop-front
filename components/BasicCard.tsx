@@ -77,7 +77,7 @@ export default function BasicCard({ product }: Props) {
                     passHref href={`/products/${product.attributes?.slug}`}>
                     <Button
                         size="small"
-                        color={'primary'}
+                        color={'secondary'}
                         variant='contained'
                         aria-label={`View ${product.attributes?.title} product`}
                     >

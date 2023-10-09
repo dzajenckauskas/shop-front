@@ -44,7 +44,7 @@ const Layout = ({ children, }: Props) => {
                 <Header isLoggedIn={isLoggedIn} />
                 <Stack minHeight={'calc(100vh - 265px)'}
                     sx={{
-                        pt: '60px', maxWidth: '100vw', overflow: 'hidden'
+                        maxWidth: '100vw', overflow: 'hidden'
                     }}>
                     {children}
                 </Stack>

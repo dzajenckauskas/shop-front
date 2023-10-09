@@ -15,6 +15,9 @@ import Link from 'next/link'
 import { PageTitle } from '../../components/layout/Pagetitle';
 import { CartItems } from '../../components/CartItems';
 import axios from 'axios';
+import { useAppSelector } from '../../app/hooks';
+import { selectCart } from '../../components/shared/cart/cartSlice';
+import { useRouter } from 'next/router';
 
 
 const steps = ['Cart', 'Shipping', 'Payment', 'Review'];
@@ -37,7 +40,8 @@ function getStepContent(step: number) {
 export default function Checkout() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [accountData, setAccountData] = React.useState<any>()
-
+    const cart = useAppSelector(selectCart)
+    const router = useRouter()
     const handleNext = () => {
         setActiveStep(activeStep + 1);
     };
@@ -57,15 +61,42 @@ export default function Checkout() {
             })
             .catch(err => console.log(`Error: ${err}`))
     }, [])
+    console.log(cart);
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // const data = new FormData(event.currentTarget);
         // console.log(data, "data");
+        const items = cart.items.map((ci) => {
+            const item = {
+                quantity: ci.qty,
+                lineTotal: ci.qty * ci.product.attributes.price,
+                price: ci.product.attributes.price,
+                originalPrice: ci.product.attributes.price,
+                product: {
+                    title: ci.product.attributes.title,
+                    slug: ci.product.attributes.slug
+                }
+            }
+            return (
+                item
+            )
+        })
+        console.log(items);
 
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`,
             {
                 data: {
-                    orderTotal: 100
+                    orderTotal: cart.total?.toFixed(2),
+                    customer: {
+                        firstName: accountData.firstName,
+                        lastName: accountData.lastName,
+                        phone: accountData.phone,
+                        email: accountData.email,
+                        isBusiness: false
+
+                    },
+                    items: items
                 }
                 // username: data.get('username'),
                 // username: data.get('username'),
@@ -77,7 +108,7 @@ export default function Checkout() {
                 // console.log('User profile', response.data.user);
                 console.log('data', response.data);
                 // sessionStorage.setItem('jwt', response.data.jwt);
-                // router.push('/login')
+                router.push('/thank-you')
             })
             .catch(error => {
                 console.log('An error occurred:', error.response);

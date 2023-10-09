@@ -41,28 +41,46 @@ export default function Review({ accountData }: Props) {
     const theme = getTheme();
     const renderCartItems = cart.items.map((ci) => {
         return (
+            // <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+            //     <Stack direction={'row'}>
+            //         {/* <IconButton
+            //             size="small"
+            //             onClick={() => handleRemoveItemFromCart(ci)}
+            //         >
+            //             <DeleteOutlineIcon sx={{ color: theme.palette.grey[500] }} />
+            //         </IconButton> */}
+            //         <Link style={{ alignSelf: 'center', fontWeight: 600 }}
+            //             passHref href={`/products/${ci.product.attributes?.slug}`}>
+            //             <Typography variant='subtitle1' sx={{ ':hover': { color: theme.palette.primary.main } }}>
+            //                 {ci.product.attributes?.title}
+            //             </Typography>
+            //         </Link>
+            //     </Stack>
+
+            //     <Box>
+            //         <Typography variant='caption'> {ci.qty}</Typography>
+            //     </Box>
+            //     <Box>
+            //         <Typography variant='subtitle1'>
+            //             {ci.product.attributes?.price?.toFixed(2)}
+            //         </Typography>
+            //     </Box>
+            // </Stack>
             <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Stack direction={'row'}>
-                    {/* <IconButton
-                        size="small"
-                        onClick={() => handleRemoveItemFromCart(ci)}
-                    >
-                        <DeleteOutlineIcon sx={{ color: theme.palette.grey[500] }} />
-                    </IconButton> */}
-                    <Link style={{ alignSelf: 'center', fontWeight: 600 }}
+                <Box width={'60%'}>
+                    <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
                         passHref href={`/products/${ci.product.attributes?.slug}`}>
                         <Typography variant='subtitle1' sx={{ ':hover': { color: theme.palette.primary.main } }}>
                             {ci.product.attributes?.title}
                         </Typography>
                     </Link>
-                </Stack>
-
-                <Box>
+                </Box>
+                <Box sx={{ width: 5 }}>
                     <Typography variant='caption'> {ci.qty}</Typography>
                 </Box>
-                <Box>
-                    <Typography variant='subtitle1'>
-                        {ci.product.attributes?.price?.toFixed(2)}
+                <Box width={'40%'}>
+                    <Typography variant='subtitle1' textAlign={'right'}>
+                        {(ci.product.attributes?.price * ci.qty)?.toFixed(2)}
                     </Typography>
                 </Box>
             </Stack>

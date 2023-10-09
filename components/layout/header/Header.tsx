@@ -11,13 +11,13 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { createRef, useState } from 'react';
+import { useState } from 'react';
+import { FocusOn } from 'react-focus-on';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectWishlist } from '../../../app/wishlistSlice';
 import { logout } from '../../shared/auth/accountSlice';
 import { selectCart } from '../../shared/cart/cartSlice';
 import { getTheme } from '../Theme';
-import { FocusOn } from 'react-focus-on';
 
 type Props = {
     isLoggedIn?: boolean;
@@ -63,7 +63,7 @@ export default function Header({ isLoggedIn }: Props) {
     const renderCartItems = cart.items.map((ci) => {
         return (
             <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Box>
+                <Box width={'60%'}>
                     <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
                         passHref href={`/products/${ci.product.attributes?.slug}`}>
                         <Typography variant='subtitle1' sx={{ ':hover': { color: theme.palette.primary.main } }}>
@@ -71,12 +71,12 @@ export default function Header({ isLoggedIn }: Props) {
                         </Typography>
                     </Link>
                 </Box>
-                <Box>
+                <Box sx={{ width: 5 }}>
                     <Typography variant='caption'> {ci.qty}</Typography>
                 </Box>
-                <Box>
-                    <Typography variant='subtitle1'>
-                        {ci.product.attributes?.price?.toFixed(2)}
+                <Box width={'40%'}>
+                    <Typography variant='subtitle1' textAlign={'right'}>
+                        {(ci.product.attributes?.price * ci.qty)?.toFixed(2)}
                     </Typography>
                 </Box>
             </Stack>

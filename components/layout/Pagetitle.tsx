@@ -6,15 +6,16 @@ import { getTheme } from "./Theme";
 type Props = {
     title: string;
     main?: boolean;
+    showIcon?: boolean;
 }
 
-export const PageTitle = ({ title, main }: Props) => {
+export const PageTitle = ({ title, main, showIcon }: Props) => {
     const theme = getTheme()
     return (
         <>
             {!main &&
                 <Stack direction={'row'} alignItems={'center'} spacing={1.5}>
-                    <PixIcon fontSize='small' sx={{ color: theme.palette.secondary.main }} />
+                    {showIcon && <PixIcon fontSize='small' sx={{ color: theme.palette.secondary.main }} />}
                     <Typography component="h1" variant="h4" fontWeight={500}>
                         {title}
                     </Typography>
