@@ -107,19 +107,19 @@ export default function Header({ isLoggedIn }: Props) {
                             </Typography>
                         </Link>
 
-                        <Stack direction={'row'} spacing={1}>
+                        <Stack direction={'row'}>
                             {/* <Link passHref href={'/wishlist'}> */}
-                            {renderWishlistItems?.length > 0 && <Avatar sx={{ bgcolor: '#fff', cursor: 'pointer' }} onClick={toggleWishlistDropdown}>
+                            {renderWishlistItems?.length > 0 && <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer' }} onClick={toggleWishlistDropdown}>
                                 <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
                             </Avatar>}
                             {/* </Link> */}
                             {/* <Link passHref href={'/checkout'}> */}
-                            <Avatar sx={{ bgcolor: '#fff', cursor: 'pointer' }} onClick={toggleCartDropdown}>
+                            <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer' }} onClick={toggleCartDropdown}>
                                 <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
                             </Avatar>
                             {/* </Link> */}
                             {isLoggedIn && <Link passHref href={'/account'}>
-                                <Avatar sx={{ bgcolor: '#fff' }}>
+                                <Avatar sx={{ bgcolor: 'transparent', }}>
                                     <AccountBoxIcon sx={{ color: theme.palette.secondary.main }} />
                                 </Avatar>
                             </Link>}
@@ -130,7 +130,7 @@ export default function Header({ isLoggedIn }: Props) {
                             </Button>
                         </Link>}
                         {isLoggedIn &&
-                            <Button variant='contained' onClick={handleLogOut}>
+                            <Button variant='contained' color='primary' size='small' onClick={handleLogOut}>
                                 Log out
                             </Button>}
                     </Stack>
