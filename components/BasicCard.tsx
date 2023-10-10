@@ -61,7 +61,7 @@ export default function BasicCard({ product }: Props) {
                         objectFit='contain'
                         objectPosition='center'
                         alt={product.attributes.images?.data[0].attributes.alternativeText ?? ''}
-                        src={product.attributes.images?.data[0]?.attributes.url}
+                        src={process.env.NEXT_PUBLIC_API_URL_PRODUCTION + product.attributes.images?.data[0]?.attributes.url}
                     />
                 </Stack>
             </Stack>

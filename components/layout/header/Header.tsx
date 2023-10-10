@@ -16,8 +16,9 @@ import { FocusOn } from 'react-focus-on';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectWishlist } from '../../../app/wishlistSlice';
 import { logout } from '../../shared/auth/accountSlice';
-import { selectCart } from '../../shared/cart/cartSlice';
 import { getTheme } from '../Theme';
+import { CartDropdown } from './CartDropdown';
+import { selectCart } from '../../shared/cart/cartSlice';
 
 type Props = {
     isLoggedIn?: boolean;
@@ -45,8 +46,8 @@ export default function Header({ isLoggedIn }: Props) {
     }
 
 
-    const cart = useAppSelector(selectCart)
     const wishlist = useAppSelector(selectWishlist)
+    const cart = useAppSelector(selectCart)
 
     const renderWishlistItems = wishlist.products.map((ci) => {
         return (
@@ -60,29 +61,7 @@ export default function Header({ isLoggedIn }: Props) {
             </Stack>
         )
     })
-    const renderCartItems = cart.items.map((ci) => {
-        return (
-            <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Box width={'60%'}>
-                    <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
-                        passHref href={`/products/${ci.product.attributes?.slug}`}>
-                        <Typography variant='subtitle1' sx={{ ':hover': { color: theme.palette.primary.main } }}>
-                            {ci.product.attributes?.title}
-                        </Typography>
-                    </Link>
-                </Box>
-                <Box sx={{ width: 5 }}>
-                    <Typography variant='caption'> {ci.qty}</Typography>
-                </Box>
-                <Box width={'40%'}>
-                    <Typography variant='subtitle1' textAlign={'right'}>
-                        {(ci.product.attributes?.price * ci.qty)?.toFixed(2)}
-                    </Typography>
-                </Box>
-            </Stack>
-        )
-    })
-    const cartTotal = cart.items.reduce((a, c) => a + (c.product.attributes.price * c.qty), 0);
+
     return (
         <>
             <Container maxWidth={false} sx={{ zIndex: 99, position: 'fixed', top: 0, alignItems: 'center', width: '100%', backgroundColor: theme.palette.background.default, height: 70 }}>
@@ -108,16 +87,25 @@ export default function Header({ isLoggedIn }: Props) {
                         </Link>
 
                         <Stack direction={'row'}>
-                            {/* <Link passHref href={'/wishlist'}> */}
-                            {renderWishlistItems?.length > 0 && <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer' }} onClick={toggleWishlistDropdown}>
-                                <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
-                            </Avatar>}
-                            {/* </Link> */}
-                            {/* <Link passHref href={'/checkout'}> */}
-                            <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer' }} onClick={toggleCartDropdown}>
-                                <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
-                            </Avatar>
-                            {/* </Link> */}
+                            {renderWishlistItems?.length > 0 &&
+                                <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer', position: 'relative' }} onClick={toggleWishlistDropdown}>
+                                    <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
+                                    <Stack sx={{ backgroundColor: theme.palette.primary.main, borderRadius: '50%', right: 6, top: 6, width: 12, height: 12, position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+                                        <Typography variant='caption' fontSize={8}>
+                                            {renderWishlistItems?.length}
+                                        </Typography>
+                                    </Stack>
+                                </Avatar>
+                            }
+                            {cart.items.length > 0 &&
+                                <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer', position: 'relative' }} onClick={toggleCartDropdown}>
+                                    <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
+                                    <Stack sx={{ backgroundColor: theme.palette.primary.main, borderRadius: '50%', right: 6, top: 6, width: 12, height: 12, position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+                                        <Typography variant='caption' fontSize={8}>
+                                            {cart.items.length}
+                                        </Typography>
+                                    </Stack>
+                                </Avatar>}
                             {isLoggedIn && <Link passHref href={'/account'}>
                                 <Avatar sx={{ bgcolor: 'transparent', }}>
                                     <AccountBoxIcon sx={{ color: theme.palette.secondary.main }} />
@@ -138,37 +126,7 @@ export default function Header({ isLoggedIn }: Props) {
                 </Stack>
                 <Stack direction={'row'} p={2} sx={{ position: 'relative', px: { lg: 4, md: 0, sm: 1, xs: 0 }, maxWidth: 'lg', mx: 'auto', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
                     {openCartDropdown &&
-                        <FocusOn autoFocus={false} onClickOutside={toggleCartDropdown} onEscapeKey={toggleCartDropdown}>
-                            <Card sx={{
-                                backgroundColor: '#fff', width: 300, position: 'absolute', zIndex: 9, top: 0,
-                                right: 32,
-                                //  right: 140,
-                                p: 3
-                            }}>
-                                <Typography variant='h6' fontWeight={700}>
-                                    {"Cart"}
-                                </Typography>
-                                <Stack spacing={1} py={3}>
-                                    {renderCartItems}
-                                </Stack>
-                                <Stack spacing={1} pb={2} sx={{ borderTop: '1px solid black' }} pt={1}>
-                                    <Stack direction={'row'} sx={{ justifyContent: 'space-between' }}>
-                                        <Typography variant='subtitle1' fontWeight={500}>
-                                            {'Cart total:'}
-                                        </Typography>
-                                        <Typography variant='subtitle1' fontWeight={500}>
-                                            {cartTotal?.toFixed(2)}
-                                        </Typography>
-                                    </Stack>
-
-                                </Stack>
-                                <Link passHref href={'/checkout'}>
-                                    <Button variant='contained' >
-                                        Go to checkout
-                                    </Button>
-                                </Link>
-                            </Card>
-                        </FocusOn>
+                        <CartDropdown toggleCartDropdown={toggleCartDropdown} />
 
                     }
                     {openWishlistDropdown &&
