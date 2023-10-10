@@ -87,7 +87,6 @@ export default function Header({ isLoggedIn }: Props) {
                         </Link>
 
                         <Stack direction={'row'}>
-                            {/* <Link passHref href={'/wishlist'}> */}
                             {renderWishlistItems?.length > 0 &&
                                 <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer', position: 'relative' }} onClick={toggleWishlistDropdown}>
                                     <BookmarkIcon sx={{ color: theme.palette.secondary.main }} />
@@ -98,8 +97,6 @@ export default function Header({ isLoggedIn }: Props) {
                                     </Stack>
                                 </Avatar>
                             }
-                            {/* </Link> */}
-                            {/* <Link passHref href={'/checkout'}> */}
                             {cart.items.length > 0 &&
                                 <Avatar sx={{ bgcolor: 'transparent', cursor: 'pointer', position: 'relative' }} onClick={toggleCartDropdown}>
                                     <ShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
@@ -109,7 +106,6 @@ export default function Header({ isLoggedIn }: Props) {
                                         </Typography>
                                     </Stack>
                                 </Avatar>}
-                            {/* </Link> */}
                             {isLoggedIn && <Link passHref href={'/account'}>
                                 <Avatar sx={{ bgcolor: 'transparent', }}>
                                     <AccountBoxIcon sx={{ color: theme.palette.secondary.main }} />
