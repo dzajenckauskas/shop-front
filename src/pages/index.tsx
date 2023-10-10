@@ -44,7 +44,7 @@ export default function Home({ newProducts, popularProducts, heroBanner }: Props
             </Button>
           </Link>
         </Stack>
-        <Image src={b.images?.data[0]?.attributes.url ?? ''} alt={''} fill objectFit='cover' objectPosition='top' />
+        <Image src={process.env.NEXT_PUBLIC_API_URL_PRODUCTION + b.images?.data[0]?.attributes.url ?? ''} alt={''} fill objectFit='cover' objectPosition='top' />
       </Stack>
     )
   })
