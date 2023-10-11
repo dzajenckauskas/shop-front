@@ -16,6 +16,7 @@ import { NumberInput } from '../../../components/shared/NumberInput'
 import Card from '@mui/material/Card';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import sendEmail from '../api/sendMail'
 type Props = {
     product?: ProductType;
 }
@@ -142,6 +143,16 @@ export const getStaticProps = async (context: any) => {
     const product = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context.params.slug}?populate=deep`
     )
+
+
+    const sendTestEmail = async () => {
+        try {
+            await sendEmail('danielius@ideaformus.lt', `Just opened: ${product?.data?.data.attributes.title}`, 'This is a test email from Next.js and Nodemailer.');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    await sendTestEmail()
     return {
         props: {
             product: product?.data?.data

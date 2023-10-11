@@ -18,6 +18,7 @@ import axios from 'axios';
 import { useAppSelector } from '../../app/hooks';
 import { selectCart } from '../../components/shared/cart/cartSlice';
 import { useRouter } from 'next/router';
+import sendEmail from './api/sendMail';
 
 
 const steps = ['Cart', 'Shipping', 'Payment', 'Review'];
@@ -42,6 +43,8 @@ export default function Checkout() {
     const [accountData, setAccountData] = React.useState<any>()
     const cart = useAppSelector(selectCart)
     const router = useRouter()
+    const [emailSent, setEmailSent] = React.useState(false);
+
     const handleNext = () => {
         setActiveStep(activeStep + 1);
     };
@@ -49,17 +52,21 @@ export default function Checkout() {
     const handleBack = () => {
         setActiveStep(activeStep - 1);
     };
+    console.log(emailSent, "emailSentemailSentemailSentemailSent");
 
     React.useEffect(() => {
         const id = sessionStorage.getItem('userId');
-        axios
-            .get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}?populate=*`)
-            .then((response) => {
-                console.log(response.data, 'GET response');
+        if (id) {
 
-                setAccountData(response.data)
-            })
-            .catch(err => console.log(`Error: ${err}`))
+            axios
+                .get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}?populate=*`)
+                .then((response) => {
+                    console.log(response.data, 'GET response');
+
+                    setAccountData(response.data)
+                })
+                .catch(err => console.log(`Error: ${err}`))
+        }
     }, [])
     console.log(cart);
 
@@ -89,10 +96,10 @@ export default function Checkout() {
                 data: {
                     orderTotal: cart.total?.toFixed(2),
                     customer: {
-                        firstName: accountData.firstName,
-                        lastName: accountData.lastName,
-                        phone: accountData.phone,
-                        email: accountData.email,
+                        firstName: accountData?.firstName,
+                        lastName: accountData?.lastName,
+                        phone: accountData?.phone,
+                        email: accountData?.email,
                         isBusiness: false
 
                     },
@@ -113,7 +120,10 @@ export default function Checkout() {
             .catch(error => {
                 console.log('An error occurred:', error.response);
             });
+
+        // https://www.youtube.com/watch?v=t2LvPXHLrek&t=109s&ab_channel=OnelightWebDev
     };
+
     return (
         <Layout>
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
@@ -143,6 +153,7 @@ export default function Checkout() {
                         >
                             {'Place order'}
                         </Button>
+                        {emailSent && <p>Email sent successfully!</p>}
                     </Box>
                     {/* {activeStep === steps.length ? (
                         <React.Fragment>
