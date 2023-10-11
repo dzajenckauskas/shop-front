@@ -16,9 +16,9 @@ export const CartItems = () => {
     const handleRemoveItemFromCart = (cartItem: CartItemType) => {
         dispatch(removeItemFromCart(cartItem))
     }
-    const renderCartItems = cart.items.map((ci) => {
+    const renderCartItems = cart.items.map((ci, index) => {
         return (
-            <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+            <Stack key={index} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Stack direction={'row'}>
                     <IconButton
                         size="small"

@@ -39,7 +39,7 @@ export default function Review({ accountData }: Props) {
     const dispatch = useAppDispatch();
     const cart = useAppSelector(selectCart)
     const theme = getTheme();
-    const renderCartItems = cart.items.map((ci) => {
+    const renderCartItems = cart.items.map((ci, index) => {
         return (
             // <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
             //     <Stack direction={'row'}>
@@ -66,7 +66,7 @@ export default function Review({ accountData }: Props) {
             //         </Typography>
             //     </Box>
             // </Stack>
-            <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+            <Stack key={index} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box width={'60%'}>
                     <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
                         passHref href={`/products/${ci.product.attributes?.slug}`}>
