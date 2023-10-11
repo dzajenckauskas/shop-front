@@ -30,5 +30,10 @@ export const getStaticProps = async () => {
         }
     };
     await sendTestEmail()
+    return {
+        props: {
+
+        }
+    }
 
 }
