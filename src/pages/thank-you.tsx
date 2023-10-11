@@ -24,7 +24,7 @@ export const getStaticProps = async () => {
 
     const sendTestEmail = async () => {
         try {
-            await sendEmail('danielius@ideaformus.lt', `Just completed order or visited thank-you page`, 'This is a test email from Next.js and Nodemailer.');
+            await sendEmail('danielius@ideaformus.lt', `Just completed order`, `Just completed order or visited thank-you page at ${new Date()}`);
         } catch (error) {
             console.error(error);
         }
