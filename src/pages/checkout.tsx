@@ -103,7 +103,7 @@ export default function Checkout() {
                         isBusiness: false
 
                     },
-                    items: items
+                    // items: items
                 }
                 // username: data.get('username'),
                 // username: data.get('username'),
@@ -115,7 +115,7 @@ export default function Checkout() {
                 // console.log('User profile', response.data.user);
                 console.log('data', response.data);
                 // sessionStorage.setItem('jwt', response.data.jwt);
-                router.push('/thank-you')
+                // router.push('/thank-you')
             })
             .catch(error => {
                 console.log('An error occurred:', error.response);
