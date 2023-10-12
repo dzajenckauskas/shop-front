@@ -145,14 +145,14 @@ export const getStaticProps = async (context: any) => {
     )
 
 
-    const sendTestEmail = async () => {
-        try {
-            await sendEmail('danielius@ideaformus.lt', `Just opened: ${product?.data?.data.attributes.title}`, 'This is a test email from Next.js and Nodemailer.');
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    await sendTestEmail()
+    // const sendTestEmail = async () => {
+    //     try {
+    //         await sendEmail('danielius@ideaformus.lt', `Just opened: ${product?.data?.data.attributes.title}`, 'This is a test email from Next.js and Nodemailer.');
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
+    // await sendTestEmail()
     return {
         props: {
             product: product?.data?.data

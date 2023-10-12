@@ -18,22 +18,22 @@ export default function Checkout() {
     );
 }
 
-export const getStaticProps = async () => {
+// export const getStaticProps = async () => {
 
 
 
-    const sendTestEmail = async () => {
-        try {
-            await sendEmail('danielius@ideaformus.lt', `Just completed order`, `Just completed order or visited thank-you page at ${new Date()}`);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    await sendTestEmail()
-    return {
-        props: {
+//     const sendTestEmail = async () => {
+//         try {
+//             await sendEmail('danielius@ideaformus.lt', `Just completed order`, `Just completed order or visited thank-you page at ${new Date()}`);
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     };
+//     await sendTestEmail()
+//     return {
+//         props: {
 
-        }
-    }
+//         }
+//     }
 
-}
+// }
