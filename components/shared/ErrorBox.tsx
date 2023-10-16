@@ -1,72 +1,78 @@
-// import { ServerError } from "@apollo/client";
+import { ServerError, ServerParseError } from "@apollo/client";
 import React from "react";
-
-
-export interface ErrorsType {
-    message: string;
-    // graphQLErrors: GraphQLErrors;
-    clientErrors: ReadonlyArray<Error>;
-    networkError: Error | null;
-    // networkError: Error | ServerParseError | ServerError | null;
-    extensions?: any;
-}
+import Stack from "@mui/material/Stack";
+import { Typography } from "@mui/material";
+import { getTheme } from "../layout/Theme";
 
 type Props = {
-    errors?: ErrorsType | string | any;
+  errors?: ErrorsType | string | any;
 }
+
+export type ErrorsType = {
+  message: string;
+  // graphQLErrors: GraphQLErrors;
+  clientErrors: ReadonlyArray<Error>;
+  networkError: Error | ServerParseError | ServerError | null;
+  extensions?: any;
+}
+
 
 type ValidationErrorsType = {
-    validation: {
-        [name: string]: any[];
-    }
+  validation: {
+    [name: string]: any[];
+  }
 }
-
+const theme = getTheme()
 const ValidationErrors = ({ validation }: ValidationErrorsType) => {
-    const renderErrors = Object.entries(validation).map(([key, value]) => {
-        const renderValue = value?.map(o => (
-            <div key={key}>{o}</div>
-        ))
-
-        return (
-            <div key={key}>{renderValue}</div>
-        )
-    })
+  const renderErrors = Object.entries(validation).map(([key, value]) => {
+    const renderValue = value?.map(o => (
+      <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption" key={key}>{o}</Typography>
+    ))
 
     return (
-        <>
-            {renderErrors}
-        </>
+      <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption" key={key}>{renderValue}</Typography>
     )
+  })
+
+  return (
+    <>
+      {renderErrors}
+    </>
+  )
 }
 
-export const ErrorBox = ({ errors }: Props) => {
-    if (typeof errors === 'string') {
-        return (<div style={{ color: '#ff0032', paddingTop: '5px', fontSize: '0.8rem' }}>{errors}</div>)
-    }
+const ErrorBox = ({ errors }: Props) => {
+  if (typeof errors === 'string') {
+    return (<Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">{errors}</Typography>)
+  }
 
-    const renderGraphQLErrors = errors?.graphQLErrors?.map((error: any) => {
-        return (
-            <div key={error.message} style={{ color: '#ff0032', paddingTop: '5px', fontSize: '0.8rem' }}>
-                {!error.extensions?.validation && <div>{error.message}</div>}
-                {error.extensions?.validation && <ValidationErrors validation={error.extensions?.validation} />}
-            </div>
-        )
-    })
+  const renderGraphQLErrors = errors?.graphQLErrors?.map((error: any) => {
+    return (
+      <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption" key={error.message}>
+        {!error.extensions?.validation && <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">{error.message}</Typography>}
+        {error.extensions?.validation && <ValidationErrors validation={error.extensions?.validation} />}
+      </Typography>
+    )
+  })
 
-    //   const serverError = (errors.networkError as ServerError)?.result
+  const serverError = (errors?.networkError as ServerError)?.result
 
-    //   const renderNetworkError = !errors?.networkError ? null :
-    //     (<div>
-    //       <div>{errors?.networkError.name}: {errors.networkError.message}</div>
-    //       <div>{typeof serverError === 'string' ? serverError : `${serverError}`}</div>
-    //     </div>)
+  const renderNetworkError = !errors?.networkError ? null :
+    (<Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">
+      <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">{errors?.networkError.name}: {errors.networkError.message}</Typography>
+      <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">{`${serverError}`}</Typography>
+    </Typography>)
 
-    return (<>
-        {/* <div >{renderNetworkError}</div> */}
+  return (
+    <Stack sx={{ mt: 1 }}>
+      {renderNetworkError && <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">{renderNetworkError}</Typography>}
 
-        {errors?.message && !errors?.graphQLErrors && <div >{errors?.message}</div>}
+      {errors?.message && !errors?.graphQLErrors && <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">{errors?.message}</Typography>}
 
-        {errors?.graphQLErrors && <div >{renderGraphQLErrors}</div>}
-    </>)
+      {errors?.graphQLErrors && <Typography lineHeight={1.4} color={theme.palette.error.main} variant="caption">{renderGraphQLErrors}</Typography>}
+    </Stack>
+  )
 
 }
+
+export default ErrorBox;
