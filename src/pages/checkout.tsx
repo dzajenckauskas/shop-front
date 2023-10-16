@@ -59,7 +59,7 @@ export default function Checkout() {
         } else {
             setAccount({} as AccounDataType)
         }
-    }, [])
+    }, [loggedInAccount.isLoggedIn])
 
     return (
         <Layout>
