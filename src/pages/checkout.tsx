@@ -5,21 +5,17 @@ import Paper from '@mui/material/Paper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
-import Stack from '@mui/material/Stack';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import * as React from 'react';
+import { useAppSelector } from '../../app/hooks';
+import { CartItems } from '../../components/CartItems';
 import AddressForm from '../../components/forms/AddressForm';
 import PaymentForm from '../../components/forms/PaymentForm';
 import Review from '../../components/forms/Review';
 import Layout from '../../components/layout/Layout';
-import Link from 'next/link'
 import { PageTitle } from '../../components/layout/Pagetitle';
-import { CartItems } from '../../components/CartItems';
-import axios from 'axios';
-import { useAppSelector } from '../../app/hooks';
 import { selectCart } from '../../components/shared/cart/cartSlice';
-import { useRouter } from 'next/router';
-import sendEmail from './api/sendMail';
-
 
 const steps = ['Cart', 'Shipping', 'Payment', 'Review'];
 

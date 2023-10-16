@@ -1,6 +1,9 @@
+import CloseIcon from '@mui/icons-material/Close'
 import { Stack } from '@mui/material'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Card from '@mui/material/Card'
+import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
 import Image from 'next/image'
@@ -8,21 +11,16 @@ import { useState } from 'react'
 import { useAppDispatch } from '../../../app/hooks'
 import Layout from '../../../components/layout/Layout'
 import { getTheme } from '../../../components/layout/Theme'
+import { NumberInput } from '../../../components/shared/NumberInput'
 import { ProductType } from '../../../components/shared/ProductTypes'
 import { WishlistToggleButton } from '../../../components/shared/WishlistToggleButton'
 import { CartItemType } from '../../../components/shared/cart/CartTypes'
 import { addItemToCart } from '../../../components/shared/cart/cartSlice'
-import { NumberInput } from '../../../components/shared/NumberInput'
-import Card from '@mui/material/Card';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import sendEmail from '../api/sendMail'
 type Props = {
     product?: ProductType;
 }
 
 export default function ProductView({ product }: Props) {
-    console.log(product, "product");
     const [quantity, setQuantity] = useState(1)
     const [showDialog, setShowDialog] = useState(false)
     const dispatch = useAppDispatch();
@@ -46,7 +44,7 @@ export default function ProductView({ product }: Props) {
     return (
         <Layout>
             {showDialog &&
-                <Stack direction={'row'} sx={{ position: 'fixed', justifyContent: 'center', width: '100%' }}>
+                <Stack direction={'row'} sx={{ position: 'fixed', justifyContent: 'center', width: '100%', zIndex: 2 }}>
                     <Stack direction={'row'} sx={{ position: 'relative', maxWidth: 'lg', width: '100%', justifyContent: 'flex-end' }}>
                         {/* <Stack sx={{ p: 2, mx: 4, position: 'relative', backgroundColor: theme.palette.secondary.main, maxWidth: 'fit-content', width: '100%', justifyContent: 'flex-end' }} > */}
                         <Card sx={{
@@ -143,16 +141,6 @@ export const getStaticProps = async (context: any) => {
     const product = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/api/products/${context.params.slug}?populate=deep`
     )
-
-
-    // const sendTestEmail = async () => {
-    //     try {
-    //         await sendEmail('danielius@ideaformus.lt', `Just opened: ${product?.data?.data.attributes.title}`, 'This is a test email from Next.js and Nodemailer.');
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-    // await sendTestEmail()
     return {
         props: {
             product: product?.data?.data
