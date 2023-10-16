@@ -16,9 +16,9 @@ export const CartDropdown = ({ toggleCartDropdown }: Props) => {
     const theme = getTheme()
     const cart = useAppSelector(selectCart)
 
-    const renderCartItems = cart.items.map((ci) => {
+    const renderCartItems = cart.items.map((ci, index) => {
         return (
-            <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+            <Stack key={index} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box width={'60%'}>
                     <Link style={{ marginLeft: 'auto', alignSelf: 'center', fontWeight: 600 }}
                         passHref href={`/products/${ci.product.attributes?.slug}`}>

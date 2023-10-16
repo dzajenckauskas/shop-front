@@ -1,7 +1,5 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -11,34 +9,22 @@ import Link from 'next/link';
 import * as React from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getTheme } from '../layout/Theme';
-import { CartItemType } from '../shared/cart/CartTypes';
-import { removeItemFromCart, selectCart } from '../shared/cart/cartSlice';
+import { selectCart } from '../shared/cart/cartSlice';
+import { CheckoutType } from '@/pages/checkout';
+import { UseFormReturn } from 'react-hook-form';
+import { AccounDataType } from './AddressForm';
 
 type Props = {
     accountData?: AccounDataType;
+    form?: UseFormReturn<CheckoutType, any, undefined>
 }
 
-export type AccounDataType = {
-    firstName: string;
-    lastName: string;
-    phone: string;
-    postcode: string;
-    address: string;
-    city: string;
-    country: string;
-    subscribed: boolean;
-}
-const payments = [
-    { name: 'Card type', detail: 'Visa' },
-    { name: 'Card holder', detail: 'Mr John Smith' },
-    { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-    { name: 'Expiry date', detail: '04/2024' },
-];
 
-export default function Review({ accountData }: Props) {
-    const dispatch = useAppDispatch();
+
+export default function Review({ accountData, form }: Props) {
     const cart = useAppSelector(selectCart)
     const theme = getTheme();
+    const customer = form?.watch('customer')
     const renderCartItems = cart.items.map((ci, index) => {
         return (
             // <Stack key={ci.id} width={'100%'} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
@@ -119,8 +105,9 @@ export default function Review({ accountData }: Props) {
                     <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
                         Shipping
                     </Typography>
-                    <Typography gutterBottom>{accountData?.firstName} {accountData?.lastName}</Typography>
-                    <Typography gutterBottom>{accountData?.address}, {accountData?.city}, {accountData?.postcode}, {accountData?.country}</Typography>
+                    <Typography gutterBottom>{customer?.firstName} {customer?.lastName}</Typography>
+                    <Typography gutterBottom>{customer?.email} {customer?.phone}</Typography>
+                    <Typography gutterBottom>{customer?.address}, {customer?.city}, {customer?.postcode}, {customer?.country}</Typography>
                 </Grid>
                 {/* <Grid item container direction="column" xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>

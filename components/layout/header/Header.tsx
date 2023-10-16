@@ -30,7 +30,7 @@ export default function Header({ isLoggedIn }: Props) {
     const router = useRouter();
     const dispatch = useAppDispatch()
     const handleLogOut = () => {
-        dispatch(logout);
+        dispatch(logout());
         sessionStorage.removeItem('jwt');
         router.push('/login');
     }
