@@ -70,8 +70,8 @@ export default function Checkout() {
     }, [])
     console.log(cart);
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
+        // event.preventDefault();
         // const data = new FormData(event.currentTarget);
         // console.log(data, "data");
         const items = cart.items.map((ci) => {
@@ -100,10 +100,10 @@ export default function Checkout() {
                         lastName: accountData?.lastName,
                         phone: accountData?.phone,
                         email: accountData?.email,
-                        isBusiness: false
+                        // isBusiness: false
 
                     },
-                    // items: items
+                    items: items
                 }
                 // username: data.get('username'),
                 // username: data.get('username'),
@@ -148,7 +148,7 @@ export default function Checkout() {
                         )} */}
                         <Button
                             variant="contained"
-                            onClick={(e: any) => handleSubmit(e)}
+                            onClick={handleSubmit}
                             sx={{ mt: 3, ml: 1 }}
                         >
                             {'Place order'}
