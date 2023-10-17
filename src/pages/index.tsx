@@ -5,6 +5,7 @@ import BasicCard from '../../components/BasicCard';
 import Layout from '../../components/layout/Layout';
 import { PageTitle } from '../../components/layout/Pagetitle';
 import { ProductsResponseType } from '../../components/shared/ProductTypes';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,10 +23,16 @@ export default function Home({ newProducts, popularProducts, heroBanner }: Props
   const theme = getTheme()
 
   const renderNewProducts = newProducts.data.map((p) => (
-    <BasicCard product={p} key={p.id} />
+    <Grid item key={p.id}
+      xs={6} sm={4} md={4} lg={3}>
+      <BasicCard product={p} />
+    </Grid>
   ))
   const renderPopularProducts = popularProducts.data.map((p) => (
-    <BasicCard product={p} key={p.id} />
+    <Grid item key={p.id}
+      xs={6} sm={4} md={4} lg={3}>
+      <BasicCard product={p} />
+    </Grid>
   ))
 
   const renderBanners = heroBanner?.data.attributes.banner.map((b: any) => {
@@ -58,10 +65,10 @@ export default function Home({ newProducts, popularProducts, heroBanner }: Props
           {renderNewProducts}
         </Stack> */}
         <PageTitle title='Popular products' />
-        <Stack direction={'row'} spacing={4}>
+        <Grid container width={'100%'}>
           {renderPopularProducts}
-        </Stack>
-        <Link passHref href={'/products'}>
+        </Grid>
+        <Link passHref href={'/products'} >
           <Button variant='outlined' color='secondary' sx={{ mt: 4 }}>
             See all products
           </Button>

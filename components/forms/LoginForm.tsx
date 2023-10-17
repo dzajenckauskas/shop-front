@@ -95,7 +95,7 @@ export const LoginForm = ({ checkout }: Props) => {
                 <Stack spacing={1.5} pb={1}>
                     <TextField
                         variant="standard"
-                        label={<Typography component={FormLabel} required variant='body2'
+                        label={<Typography component={FormLabel} required variant='body1'
                             color={!!errors?.email?.message ? 'error' : theme.palette.primary.main}   >
                             {'Email'}
                         </Typography>}
@@ -106,7 +106,7 @@ export const LoginForm = ({ checkout }: Props) => {
                     />
                     <TextField
                         variant="standard"
-                        label={<Typography component={FormLabel} required variant='body2'
+                        label={<Typography component={FormLabel} required variant='body1'
                             color={!!errors?.password?.message ? 'error' : theme.palette.primary.main}   >
                             {'Password'}
                         </Typography>}

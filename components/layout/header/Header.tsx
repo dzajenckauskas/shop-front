@@ -19,6 +19,8 @@ import { logout } from '../../shared/auth/accountSlice';
 import { getTheme } from '../Theme';
 import { CartDropdown } from './CartDropdown';
 import { selectCart } from '../../shared/cart/cartSlice';
+import MenuIcon from '@mui/icons-material/Menu';
+import { MobileMenuDropdown } from './MobileMenuDropdown';
 
 type Props = {
     isLoggedIn?: boolean;
@@ -35,6 +37,7 @@ export default function Header({ isLoggedIn }: Props) {
         router.push('/login');
     }
     const [openCartDropdown, setOpenCartDropdown] = useState(false)
+    const [openMobileMenuDropdown, setOpenMobileMenuDropdown] = useState(false)
 
     const toggleCartDropdown = () => {
         setOpenCartDropdown(!openCartDropdown)
@@ -43,6 +46,9 @@ export default function Header({ isLoggedIn }: Props) {
 
     const toggleWishlistDropdown = () => {
         setOpenWishlistDropdown(!openWishlistDropdown)
+    }
+    const toggleOpenMobileMenuDropdown = () => {
+        setOpenMobileMenuDropdown(!openMobileMenuDropdown)
     }
 
 
@@ -67,14 +73,12 @@ export default function Header({ isLoggedIn }: Props) {
             <Container maxWidth={false} sx={{ zIndex: 99, position: 'fixed', top: 0, alignItems: 'center', width: '100%', backgroundColor: theme.palette.background.default, height: 70 }}>
                 <Stack direction={'row'} p={2} sx={{ px: { lg: 4, md: 0, sm: 1, xs: 0 }, maxWidth: 'lg', mx: 'auto', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
                     <Link passHref href={'/'} style={{ display: 'flex', alignItems: 'center' }}>
-                        <Avatar sx={{ bgcolor: '#fff', mr: 1 }}>
-                            <PixIcon fontSize='large' sx={{ color: theme.palette.secondary.main }} />
-                        </Avatar>
-                        <Typography variant='h6' sx={{ fontWeight: 500, color: theme.palette.grey[400] }}>
-                            localShop
+                        <PixIcon sx={{ color: theme.palette.secondary.main }} />
+                        <Typography variant='h6' sx={{ ml: 1, fontWeight: 500, color: theme.palette.grey[400] }}>
+                            localshop
                         </Typography>
                     </Link>
-                    <Stack direction={'row'} spacing={4} alignItems={'center'}>
+                    <Stack direction={'row'} spacing={4} alignItems={'center'} sx={{ display: { md: 'flex', xs: 'none' } }}>
                         <Link passHref href={'/products'}>
                             <Typography color={theme.palette.grey[400]} sx={{ ':hover': { color: theme.palette.primary.main } }}>
                                 Products
@@ -123,11 +127,18 @@ export default function Header({ isLoggedIn }: Props) {
                             </Button>}
                     </Stack>
 
+                    <Avatar sx={{ bgcolor: 'transparent', display: { md: 'none', sm: 'flex', cursor: 'pointer' } }}
+                        onClick={toggleOpenMobileMenuDropdown}>
+                        <MenuIcon sx={{ color: theme.palette.secondary.main }} />
+                    </Avatar>
+
                 </Stack>
                 <Stack direction={'row'} p={2} sx={{ position: 'relative', px: { lg: 4, md: 0, sm: 1, xs: 0 }, maxWidth: 'lg', mx: 'auto', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
                     {openCartDropdown &&
                         <CartDropdown toggleCartDropdown={toggleCartDropdown} />
-
+                    }
+                    {openMobileMenuDropdown &&
+                        <MobileMenuDropdown isLoggedIn={isLoggedIn} toggleOpenMobileMenuDropdown={toggleOpenMobileMenuDropdown} />
                     }
                     {openWishlistDropdown &&
                         <FocusOn autoFocus={false} onClickOutside={toggleWishlistDropdown} onEscapeKey={toggleWishlistDropdown}>

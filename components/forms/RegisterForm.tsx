@@ -72,7 +72,7 @@ export const RegisterForm = () => {
                 <Stack spacing={1.5} pb={1}>
                     <TextField
                         variant="standard"
-                        label={<Typography component={FormLabel} required variant='body2'
+                        label={<Typography component={FormLabel} required variant='body1'
                             color={!!errors?.username?.message ? 'error' : theme.palette.primary.main}   >
                             {'Username'}
                         </Typography>}
@@ -83,7 +83,7 @@ export const RegisterForm = () => {
                     />
                     <TextField
                         variant="standard"
-                        label={<Typography component={FormLabel} required variant='body2'
+                        label={<Typography component={FormLabel} required variant='body1'
                             color={!!errors?.email?.message ? 'error' : theme.palette.primary.main}   >
                             {'Email'}
                         </Typography>}
@@ -94,7 +94,7 @@ export const RegisterForm = () => {
                     />
                     <TextField
                         variant="standard"
-                        label={<Typography component={FormLabel} required variant='body2'
+                        label={<Typography component={FormLabel} required variant='body1'
                             color={!!errors?.password?.message ? 'error' : theme.palette.primary.main}   >
                             {'Password'}
                         </Typography>}
@@ -107,7 +107,7 @@ export const RegisterForm = () => {
                     <Stack>
                         <FormControl sx={{ marginBottom: -1.5 }}>
                             <FormControlLabel
-                                label={<Typography component={FormLabel} sx={{ cursor: 'pointer' }}
+                                label={<Typography component={FormLabel} sx={{ curso1: 'pointer' }}
                                     required color={errors.acceptTerms?.message ? theme.palette.error.main : theme.palette.primary.main} >
                                     <span onClick={() => setValue('acceptTerms', !acceptTerms)}>
                                         {'Agree with '}&nbsp;
@@ -137,7 +137,7 @@ export const RegisterForm = () => {
                         </FormControl>
                         <FormControl>
                             <FormControlLabel
-                                label={<Typography component={FormLabel} sx={{ cursor: 'pointer' }} onClick={() => setValue('subscribed', !subscribe)}
+                                label={<Typography component={FormLabel} sx={{ curso1: 'pointer' }} onClick={() => setValue('subscribed', !subscribe)}
                                     color={errors.subscribed?.message ? theme.palette.error.main : theme.palette.primary.main} >
                                     {'Subscribe to a newsletter'}
                                 </Typography>}

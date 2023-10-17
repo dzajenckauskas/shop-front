@@ -35,7 +35,7 @@ export default function BasicCard({ product }: Props) {
     const cartItem = cart.items.find((ci) => ci.product.id === product.id)
 
     return (
-        <Card variant="outlined" sx={{ padding: 2, width: '100%', maxWidth: { lg: '25%', md: '33%', sm: '50%', xs: '100%' }, position: 'relative' }}>
+        <Card elevation={0} sx={{ padding: 2, width: '100%', position: 'relative' }}>
             <Stack direction={'row'} alignItems={'flex-start'} justifyContent={'space-between'} sx={{
                 position: 'absolute', zIndex: 1, left: 16
             }}>
@@ -54,17 +54,20 @@ export default function BasicCard({ product }: Props) {
                     <AddShoppingCartIcon sx={{ color: theme.palette.secondary.main }} />
                 </HtmlTooltip>
             </Stack>}
-            <Stack sx={{ overflow: 'hidden' }}>
-                <Stack minHeight="200px" py={1} position={'relative'} sx={{ ':hover img': { transform: 'scale(1.25)' } }}>
-                    <Image
-                        fill
-                        objectFit='contain'
-                        objectPosition='center'
-                        alt={product.attributes.images?.data[0].attributes.alternativeText ?? ''}
-                        src={process.env.NEXT_PUBLIC_API_URL_PRODUCTION + product.attributes.images?.data[0]?.attributes.url}
-                    />
+            <Link style={{ marginLeft: 'auto', alignSelf: 'flex-end', fontWeight: 600 }}
+                passHref href={`/products/${product.attributes?.slug}`}>
+                <Stack sx={{ overflow: 'hidden' }}>
+                    <Stack minHeight="200px" py={1} position={'relative'} sx={{ ':hover img': { transform: 'scale(1.25)' } }}>
+                        <Image
+                            fill
+                            objectFit='contain'
+                            objectPosition='center'
+                            alt={product.attributes.images?.data[0].attributes.alternativeText ?? ''}
+                            src={process.env.NEXT_PUBLIC_API_URL_PRODUCTION + product.attributes.images?.data[0]?.attributes.url}
+                        />
+                    </Stack>
                 </Stack>
-            </Stack>
+            </Link>
             <Typography variant='h6' fontWeight={600} py={1}>{product.attributes?.title}</Typography>
             <Stack direction={'row'} alignItems={'flex-end'}>
                 <Stack spacing={.25} >
